@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E286B9372B0D0472001D1EA3 /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = E286B9362B0D0472001D1EA3 /* MarkdownUI */; };
+		E286B9392B0D47BC001D1EA3 /* SampleRecipes.swift in Sources */ = {isa = PBXBuildFile; fileRef = E286B9382B0D47BC001D1EA3 /* SampleRecipes.swift */; };
+		E286B93B2B0D513D001D1EA3 /* SampleData.json in Resources */ = {isa = PBXBuildFile; fileRef = E286B93A2B0D513D001D1EA3 /* SampleData.json */; };
 		E2CA61B22B0D00780097C530 /* RecipesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CA61B12B0D00780097C530 /* RecipesApp.swift */; };
 		E2CA61B42B0D00780097C530 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CA61B32B0D00780097C530 /* ContentView.swift */; };
 		E2CA61B62B0D00780097C530 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CA61B52B0D00780097C530 /* Item.swift */; };
@@ -35,6 +38,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E286B9382B0D47BC001D1EA3 /* SampleRecipes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleRecipes.swift; sourceTree = "<group>"; };
+		E286B93A2B0D513D001D1EA3 /* SampleData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = SampleData.json; sourceTree = "<group>"; };
 		E2CA61AE2B0D00780097C530 /* Recipes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Recipes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2CA61B12B0D00780097C530 /* RecipesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesApp.swift; sourceTree = "<group>"; };
 		E2CA61B32B0D00780097C530 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -53,6 +58,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E286B9372B0D0472001D1EA3 /* MarkdownUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -99,8 +105,10 @@
 				E2CA61B12B0D00780097C530 /* RecipesApp.swift */,
 				E2CA61B32B0D00780097C530 /* ContentView.swift */,
 				E2CA61B52B0D00780097C530 /* Item.swift */,
+				E286B9382B0D47BC001D1EA3 /* SampleRecipes.swift */,
 				E2CA61B72B0D007A0097C530 /* Assets.xcassets */,
 				E2CA61B92B0D007A0097C530 /* Preview Content */,
+				E286B93A2B0D513D001D1EA3 /* SampleData.json */,
 			);
 			path = Recipes;
 			sourceTree = "<group>";
@@ -146,6 +154,9 @@
 			dependencies = (
 			);
 			name = Recipes;
+			packageProductDependencies = (
+				E286B9362B0D0472001D1EA3 /* MarkdownUI */,
+			);
 			productName = Recipes;
 			productReference = E2CA61AE2B0D00780097C530 /* Recipes.app */;
 			productType = "com.apple.product-type.application";
@@ -218,6 +229,9 @@
 				Base,
 			);
 			mainGroup = E2CA61A52B0D00780097C530;
+			packageReferences = (
+				E286B9352B0D0472001D1EA3 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */,
+			);
 			productRefGroup = E2CA61AF2B0D00780097C530 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -235,6 +249,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E2CA61BB2B0D007A0097C530 /* Preview Assets.xcassets in Resources */,
+				E286B93B2B0D513D001D1EA3 /* SampleData.json in Resources */,
 				E2CA61B82B0D007A0097C530 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -263,6 +278,7 @@
 				E2CA61B42B0D00780097C530 /* ContentView.swift in Sources */,
 				E2CA61B62B0D00780097C530 /* Item.swift in Sources */,
 				E2CA61B22B0D00780097C530 /* RecipesApp.swift in Sources */,
+				E286B9392B0D47BC001D1EA3 /* SampleRecipes.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -592,6 +608,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		E286B9352B0D0472001D1EA3 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/gonzalezreal/swift-markdown-ui";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.2.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		E286B9362B0D0472001D1EA3 /* MarkdownUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E286B9352B0D0472001D1EA3 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */;
+			productName = MarkdownUI;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = E2CA61A62B0D00780097C530 /* Project object */;
 }

@@ -12,6 +12,7 @@ import MarkdownUI
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var items: [Item]
+//    @State var isCreateModal: Bool = false
     
     var body: some View {
         NavigationSplitView {
@@ -41,7 +42,7 @@ struct ContentView: View {
                 .onDelete(perform: deleteItems)
             }
             .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
+                ToolbarItem (placement: .navigationBarTrailing) {
                     EditButton()
                 }
                 ToolbarItem {
@@ -49,9 +50,24 @@ struct ContentView: View {
                         Label("Initialize", systemImage: "folder.badge.plus")
                     }
                 }
+//                NavigationLink(destination: EditButton()) {
+//                           Image(systemName: "pencil").imageScale(.large)
+//                        }
+//                NavigationLink(destination: newRecipe()) {
+//                           Image(systemName: "person.circle").imageScale(.large)
+//                        }
+//                Label("Add Item", systemImage: "plus")
+//                ToolbarItem {
+//                    Button("Add Item") {
+//                        self.isCreateModal = true
+//                    }
+//                    .sheet(isPresented: $isCreateModal, content: {
+//                        newRecipe()
+//                    })
+//                }
                 ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
+                    NavigationLink(destination: NewRecipeView()) {
+                        Image(systemName: "plus").imageScale(.large)
                     }
                 }
             }
@@ -81,15 +97,15 @@ struct ContentView: View {
                 modelContext.insert(recipe)
             }
             
-//            if let recipes = loadJson(filename: "SampleData") {
-//                for recipe in recipes {
-//                    modelContext.insert(Item(
-//                        title: recipe.title,
-//                        ingredients: recipe.ingredients,
-//                        instructions: recipe.instructions
-//                    ))
-//                }
-//            }
+            //            if let recipes = loadJson(filename: "SampleData") {
+            //                for recipe in recipes {
+            //                    modelContext.insert(Item(
+            //                        title: recipe.title,
+            //                        ingredients: recipe.ingredients,
+            //                        instructions: recipe.instructions
+            //                    ))
+            //                }
+            //            }
         }
     }
 }

@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct NewRecipeView: View {
+    @Environment(\.modelContext) private var modelContext
     @Environment(\.presentationMode) var presentationMode
     @State private var title = ""
     @State private var author = ""
@@ -59,12 +60,19 @@ struct NewRecipeView: View {
                 Button("Save") {
                     // Save the new recipe here
                     // For example, you might save it to your app's data store
-                    
+                    addItem()
                     presentationMode.wrappedValue.dismiss()
                 }
             }
         }
     }
+    
+    private func addItem() {
+           withAnimation {
+               let newItem = Item(title: title, ingredients: ingredients, instructions: instructions)
+               modelContext.insert(newItem)
+           }
+       }
 }
 
 #Preview {

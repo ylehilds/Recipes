@@ -6,18 +6,22 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct NewRecipeView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.presentationMode) var presentationMode
     @State private var title = ""
     @State private var author = ""
+    @State private var date = ""
     @State private var timeRequired = ""
     @State private var servings = ""
     @State private var expertiseRequired = ""
     @State private var caloriesPerServing = ""
     @State private var ingredients = ""
     @State private var instructions = ""
+    @State private var notes = ""
+    @State private var category = ""
     
     var body: some View {
         Form {
@@ -26,6 +30,9 @@ struct NewRecipeView: View {
             }
             Section {
                 TextField("Author", text: $author)
+            }
+            Section {
+                TextField("Date", text: $date)
             }
             Section {
                 TextField("Time Required", text: $timeRequired)
@@ -45,6 +52,15 @@ struct NewRecipeView: View {
             Section {
                 TextField("Instructions", text: $instructions)
             }
+            Section {
+                TextField("Notes", text: $notes)
+            }
+            Picker("Category", selection: $category) {
+                                Text("").tag("")
+                                Text("Pork").tag("pork")
+                                Text("Chicken").tag("chicken")
+                                Text("Steak").tag("steak")
+                            }
         }
         .navigationBarBackButtonHidden(true)
         .toolbar {
@@ -68,11 +84,11 @@ struct NewRecipeView: View {
     }
     
     private func addItem() {
-           withAnimation {
-               let newItem = Item(title: title, ingredients: ingredients, instructions: instructions)
-               modelContext.insert(newItem)
-           }
-       }
+        withAnimation {
+            let newItem = Item(title: title, ingredients: ingredients, instructions: instructions)
+            modelContext.insert(newItem)
+        }
+    }
 }
 
 #Preview {

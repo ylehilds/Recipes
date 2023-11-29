@@ -11,74 +11,83 @@ import MarkdownUI
 
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
-    @Query private var items: [Item]
+    @Query private var recipes: [Recipe]
 //    @State var isCreateModal: Bool = false
     
     var body: some View {
         NavigationSplitView {
             List {
-                ForEach(items) { item in
+                // A section of top-level abilities like browse all, search, favorites
+                Section(header: Text("Top Level Actions")) {
                     NavigationLink {
-                        ScrollView {
-                            VStack {
-                                Markdown {
-                                    item.title
-                                }
-                                .padding()
-                                Markdown {
-                                    item.ingredients
-                                }
-                                .padding()
-                                Markdown {
-                                    item.instructions
-                                }
-                                .padding()
-                            }
-                        }
+                        browseAllList
                     } label: {
-                        Text(item.title)
+                        Text("Browse All")
+                    }
+
+                    NavigationLink {
+                        Text("Search view")
+                        // TODO: figure this out
+                    } label: {
+                        Text("Search")
                     }
                 }
-                .onDelete(perform: deleteItems)
+
+                // Categories
             }
-            .toolbar {
-                ToolbarItem (placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-                ToolbarItem {
-                    Button(action: initializeRecipes) {
-                        Label("Initialize", systemImage: "folder.badge.plus")
-                    }
-                }
-//                NavigationLink(destination: EditButton()) {
-//                           Image(systemName: "pencil").imageScale(.large)
-//                        }
-//                NavigationLink(destination: newRecipe()) {
-//                           Image(systemName: "person.circle").imageScale(.large)
-//                        }
-//                Label("Add Item", systemImage: "plus")
-//                ToolbarItem {
-//                    Button("Add Item") {
-//                        self.isCreateModal = true
-//                    }
-//                    .sheet(isPresented: $isCreateModal, content: {
-//                        newRecipe()
-//                    })
-//                }
-                ToolbarItem {
-                    NavigationLink(destination: NewRecipeView()) {
-                        Image(systemName: "plus").imageScale(.large)
-                    }
-                }
-            }
+        } content: {
+            browseAllList
         } detail: {
             Text("Select an item")
         }
     }
     
+    private var browseAllList: some View {
+        List {
+            ForEach(recipes) { recipe in
+                NavigationLink {
+                    ScrollView {
+                        VStack {
+                            Markdown {
+                                recipe.title
+                            }
+                            .padding()
+                            Markdown {
+                                recipe.ingredients
+                            }
+                            .padding()
+                            Markdown {
+                                recipe.instructions
+                            }
+                            .padding()
+                        }
+                    }
+                } label: {
+                    Text(recipe.title)
+                }
+            }
+            .onDelete(perform: deleteItems)
+        }
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                EditButton()
+            }
+            ToolbarItem {
+                Button(action: initializeRecipes) {
+                    Label("Initialize", systemImage: "folder.badge.plus")
+                }
+            }
+            ToolbarItem {
+                NavigationLink(destination: NewRecipeView()) {
+                    Image(systemName: "plus").imageScale(.large)
+                }
+            }
+        }
+    }
+    
     private func addItem() {
         withAnimation {
-            let newItem = Item(title: "Some Item", ingredients: "Some Stuff", instructions: "Do something")
+            let newItem = Recipe(title: "Some Item", ingredients: "Some Stuff", instructions: "Do something")
             modelContext.insert(newItem)
         }
     }
@@ -86,7 +95,7 @@ struct ContentView: View {
     private func deleteItems(offsets: IndexSet) {
         withAnimation {
             for index in offsets {
-                modelContext.delete(items[index])
+                modelContext.delete(recipes[index])
             }
         }
     }
@@ -96,7 +105,6 @@ struct ContentView: View {
             for recipe in sampleRecipes {
                 modelContext.insert(recipe)
             }
-            
             //            if let recipes = loadJson(filename: "SampleData") {
             //                for recipe in recipes {
             //                    modelContext.insert(Item(
@@ -112,5 +120,5 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
-        .modelContainer(for: Item.self, inMemory: true)
+        .modelContainer(for: Recipe.self, inMemory: true)
 }

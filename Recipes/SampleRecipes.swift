@@ -53,7 +53,7 @@ func loadJson(filename fileName: String) -> [SampleRecipe]? {
 //]
 
 let sampleRecipes = [
-    Item(
+    Recipe(
         title: "Pfeffernüsse",
         ingredients:"""
             | Quantity       | Ingredient                                                    |
@@ -100,7 +100,7 @@ let sampleRecipes = [
 
         """
     ),
-    Item(
+    Recipe(
     title: "Nürnberger Elisenlebkuchen (German Lebkuchen)",
     ingredients: """
     - 5 large eggs

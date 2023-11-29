@@ -25,42 +25,22 @@ struct NewRecipeView: View {
     
     var body: some View {
         Form {
-            Section {
-                TextField("Title", text: $title)
-            }
-            Section {
-                TextField("Author", text: $author)
-            }
-            Section {
-                TextField("Date", text: $date)
-            }
-            Section {
-                TextField("Time Required", text: $timeRequired)
-            }
-            Section {
-                TextField("Servings", text: $servings)
-            }
-            Section {
-                TextField("Expertise Required", text: $expertiseRequired)
-            }
-            Section {
-                TextField("Calories Per Serving", text: $caloriesPerServing)
-            }
-            Section {
-                TextField("Ingredients", text: $ingredients)
-            }
-            Section {
-                TextField("Instructions", text: $instructions)
-            }
-            Section {
-                TextField("Notes", text: $notes)
-            }
+            TextField("Title", text: $title)
+            TextField("Author", text: $author)
+            TextField("Date", text: $date)
+            TextField("Time Required", text: $timeRequired)
+            TextField("Servings", text: $servings)
+            TextField("Expertise Required", text: $expertiseRequired)
+            TextField("Calories Per Serving", text: $caloriesPerServing)
+            TextField("Ingredients", text: $ingredients, axis: .vertical)
+            TextField("Instructions", text: $instructions, axis: .vertical)
+            TextField("Notes", text: $notes, axis: .vertical)
             Picker("Category", selection: $category) {
-                                Text("").tag("")
-                                Text("Pork").tag("pork")
-                                Text("Chicken").tag("chicken")
-                                Text("Steak").tag("steak")
-                            }
+                Text("").tag("")
+                Text("Pork").tag("pork")
+                Text("Chicken").tag("chicken")
+                Text("Steak").tag("steak")
+            }
         }
         .navigationBarBackButtonHidden(true)
         .toolbar {

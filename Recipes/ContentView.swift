@@ -12,7 +12,9 @@ import MarkdownUI
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var recipes: [Recipe]
-//    @State var isCreateModal: Bool = false
+    @State private var selectedRecipe: Recipe?
+    
+    //    @State var isCreateModal: Bool = false
     
     var body: some View {
         NavigationSplitView {
@@ -24,7 +26,7 @@ struct ContentView: View {
                     } label: {
                         Text("Browse All")
                     }
-
+                    
                     NavigationLink {
                         Text("Search view")
                         // TODO: figure this out
@@ -32,7 +34,7 @@ struct ContentView: View {
                         Text("Search")
                     }
                 }
-
+                
                 // Categories
             }
         } content: {
@@ -62,8 +64,18 @@ struct ContentView: View {
                             .padding()
                         }
                     }
+                    .toolbar {
+                        ToolbarItem(placement: .navigationBarTrailing) {
+                            NavigationLink(destination: EditRecipeView(recipe: recipe)) {
+                                Image(systemName: "pencil").imageScale(.large)
+                            }
+                        }
+                    }
                 } label: {
                     Text(recipe.title)
+                }
+                .onTapGesture {
+                    selectedRecipe = recipe
                 }
             }
             .onDelete(perform: deleteItems)

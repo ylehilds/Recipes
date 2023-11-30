@@ -19,6 +19,7 @@
 		E2CA61CF2B0D007A0097C530 /* RecipesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CA61CE2B0D007A0097C530 /* RecipesUITests.swift */; };
 		E2CA61D12B0D007A0097C530 /* RecipesUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CA61D02B0D007A0097C530 /* RecipesUITestsLaunchTests.swift */; };
 		E2DFC54A2B1518080060060B /* NewRecipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DFC5492B1518080060060B /* NewRecipeView.swift */; };
+		E2DFC58A2B17E9B80060060B /* EditRecipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DFC5892B17E9B80060060B /* EditRecipeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 		E2CA61CE2B0D007A0097C530 /* RecipesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesUITests.swift; sourceTree = "<group>"; };
 		E2CA61D02B0D007A0097C530 /* RecipesUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		E2DFC5492B1518080060060B /* NewRecipeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewRecipeView.swift; sourceTree = "<group>"; };
+		E2DFC5892B17E9B80060060B /* EditRecipeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditRecipeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +114,7 @@
 				E2CA61B92B0D007A0097C530 /* Preview Content */,
 				E286B93A2B0D513D001D1EA3 /* SampleData.json */,
 				E2DFC5492B1518080060060B /* NewRecipeView.swift */,
+				E2DFC5892B17E9B80060060B /* EditRecipeView.swift */,
 			);
 			path = Recipes;
 			sourceTree = "<group>";
@@ -282,6 +285,7 @@
 				E2CA61B62B0D00780097C530 /* Catalog.swift in Sources */,
 				E2CA61B22B0D00780097C530 /* RecipesApp.swift in Sources */,
 				E286B9392B0D47BC001D1EA3 /* SampleRecipes.swift in Sources */,
+				E2DFC58A2B17E9B80060060B /* EditRecipeView.swift in Sources */,
 				E2DFC54A2B1518080060060B /* NewRecipeView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

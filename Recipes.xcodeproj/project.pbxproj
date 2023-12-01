@@ -18,6 +18,9 @@
 		E2CA61C52B0D007A0097C530 /* RecipesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CA61C42B0D007A0097C530 /* RecipesTests.swift */; };
 		E2CA61CF2B0D007A0097C530 /* RecipesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CA61CE2B0D007A0097C530 /* RecipesUITests.swift */; };
 		E2CA61D12B0D007A0097C530 /* RecipesUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CA61D02B0D007A0097C530 /* RecipesUITestsLaunchTests.swift */; };
+		E2D4AB392B1990E100452AD7 /* SampleCategories.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D4AB382B1990E100452AD7 /* SampleCategories.swift */; };
+		E2D4AB402B1999AD00452AD7 /* NewCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D4AB3F2B1999AD00452AD7 /* NewCategoryView.swift */; };
+		E2D4AB422B199B5100452AD7 /* EditCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D4AB412B199B5100452AD7 /* EditCategoryView.swift */; };
 		E2DFC54A2B1518080060060B /* NewRecipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DFC5492B1518080060060B /* NewRecipeView.swift */; };
 		E2DFC58A2B17E9B80060060B /* EditRecipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DFC5892B17E9B80060060B /* EditRecipeView.swift */; };
 /* End PBXBuildFile section */
@@ -53,6 +56,10 @@
 		E2CA61CA2B0D007A0097C530 /* RecipesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RecipesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2CA61CE2B0D007A0097C530 /* RecipesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesUITests.swift; sourceTree = "<group>"; };
 		E2CA61D02B0D007A0097C530 /* RecipesUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		E2D4AB382B1990E100452AD7 /* SampleCategories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleCategories.swift; sourceTree = "<group>"; };
+		E2D4AB3E2B19987100452AD7 /* SampleCategoryData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = SampleCategoryData.json; sourceTree = "<group>"; };
+		E2D4AB3F2B1999AD00452AD7 /* NewCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCategoryView.swift; sourceTree = "<group>"; };
+		E2D4AB412B199B5100452AD7 /* EditCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCategoryView.swift; sourceTree = "<group>"; };
 		E2DFC5492B1518080060060B /* NewRecipeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewRecipeView.swift; sourceTree = "<group>"; };
 		E2DFC5892B17E9B80060060B /* EditRecipeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditRecipeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -109,12 +116,16 @@
 				E2CA61B12B0D00780097C530 /* RecipesApp.swift */,
 				E2CA61B32B0D00780097C530 /* ContentView.swift */,
 				E2CA61B52B0D00780097C530 /* Catalog.swift */,
+				E2D4AB382B1990E100452AD7 /* SampleCategories.swift */,
 				E286B9382B0D47BC001D1EA3 /* SampleRecipes.swift */,
 				E2CA61B72B0D007A0097C530 /* Assets.xcassets */,
 				E2CA61B92B0D007A0097C530 /* Preview Content */,
 				E286B93A2B0D513D001D1EA3 /* SampleData.json */,
 				E2DFC5492B1518080060060B /* NewRecipeView.swift */,
 				E2DFC5892B17E9B80060060B /* EditRecipeView.swift */,
+				E2D4AB3E2B19987100452AD7 /* SampleCategoryData.json */,
+				E2D4AB3F2B1999AD00452AD7 /* NewCategoryView.swift */,
+				E2D4AB412B199B5100452AD7 /* EditCategoryView.swift */,
 			);
 			path = Recipes;
 			sourceTree = "<group>";
@@ -282,8 +293,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				E2CA61B42B0D00780097C530 /* ContentView.swift in Sources */,
+				E2D4AB422B199B5100452AD7 /* EditCategoryView.swift in Sources */,
 				E2CA61B62B0D00780097C530 /* Catalog.swift in Sources */,
 				E2CA61B22B0D00780097C530 /* RecipesApp.swift in Sources */,
+				E2D4AB402B1999AD00452AD7 /* NewCategoryView.swift in Sources */,
+				E2D4AB392B1990E100452AD7 /* SampleCategories.swift in Sources */,
 				E286B9392B0D47BC001D1EA3 /* SampleRecipes.swift in Sources */,
 				E2DFC58A2B17E9B80060060B /* EditRecipeView.swift in Sources */,
 				E2DFC54A2B1518080060060B /* NewRecipeView.swift in Sources */,

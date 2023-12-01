@@ -12,8 +12,10 @@ import MarkdownUI
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var recipes: [Recipe]
+    @Query private var categories: [Category]
     @State private var selectedRecipe: Recipe?
-    
+    @State private var selectedCategory: Category?
+
     //    @State var isCreateModal: Bool = false
     
     var body: some View {
@@ -36,6 +38,13 @@ struct ContentView: View {
                 }
                 
                 // Categories
+                Section(header: Text("Categories")) {
+                    NavigationLink {
+                        categoriesList
+                    } label: {
+                        Text("Categories")
+                    }
+                }
             }
         } content: {
             browseAllList
@@ -97,6 +106,51 @@ struct ContentView: View {
         }
     }
     
+    private var categoriesList: some View {
+        List {
+            ForEach(categories) { category in
+                NavigationLink {
+                    ScrollView {
+                        VStack {
+                            Markdown {
+                                category.name
+                            }
+                            .padding()
+                        }
+                    }
+                    .toolbar {
+                        ToolbarItem(placement: .navigationBarTrailing) {
+                            NavigationLink(destination: EditCategoryView(category: category)) {
+                                Image(systemName: "pencil").imageScale(.large)
+                            }
+                        }
+                    }
+                } label: {
+                    Text(category.name)
+                }
+                .onTapGesture {
+                    selectedCategory = category
+                }
+            }
+            .onDelete(perform: deleteCategory)
+        }
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                EditButton()
+            }
+            ToolbarItem {
+                Button(action: initializeCategories) {
+                    Label("Initialize", systemImage: "folder.badge.plus")
+                }
+            }
+            ToolbarItem {
+                NavigationLink(destination: NewCategoryView()) {
+                    Image(systemName: "plus").imageScale(.large)
+                }
+            }
+        }
+    }
+    
     private func addItem() {
         withAnimation {
             let newItem = Recipe(title: "Some Item", ingredients: "Some Stuff", instructions: "Do something")
@@ -112,6 +166,14 @@ struct ContentView: View {
         }
     }
     
+    private func deleteCategory(offsets: IndexSet) {
+        withAnimation {
+            for index in offsets {
+                modelContext.delete(categories[index])
+            }
+        }
+    }
+    
     private func initializeRecipes() {
         withAnimation {
             for recipe in sampleRecipes {
@@ -123,6 +185,21 @@ struct ContentView: View {
             //                        title: recipe.title,
             //                        ingredients: recipe.ingredients,
             //                        instructions: recipe.instructions
+            //                    ))
+            //                }
+            //            }
+        }
+    }
+    
+    private func initializeCategories() {
+        withAnimation {
+            for category in sampleCategories {
+                modelContext.insert(category)
+            }
+            //            if let categories = loadJson(filename: "SampleCategoryData") {
+            //                for category in categories {
+            //                    modelContext.insert(Category(
+            //                        name: category.name
             //                    ))
             //                }
             //            }

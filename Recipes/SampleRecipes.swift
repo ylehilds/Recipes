@@ -98,7 +98,8 @@ let sampleRecipes = [
         For the authentic Lebkuchengewürz recipe, visit:
         [Homemade Lebkuchengewürz](https://www.daringgourmet.com/homemade-lebkuchengewuerz-german-gingerbread-spice-blend/)
 
-        """
+        """,
+        favorite: false
     ),
     Recipe(
     title: "Nürnberger Elisenlebkuchen (German Lebkuchen)",
@@ -154,5 +155,7 @@ let sampleRecipes = [
     - The batter should be thick enough to scoop, but not runny.
     - Adjust the amount of almond or hazelnut meal if necessary to achieve the right consistency.
     - The flavor of the Lebkuchen develops and improves over time, so these are great for making ahead.
-    """)
+    """,
+    favorite: false
+)
 ]

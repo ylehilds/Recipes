@@ -60,7 +60,7 @@ struct EditRecipeView_Previews: PreviewProvider {
         do {
             let config = ModelConfiguration(isStoredInMemoryOnly: true)
             let container = try ModelContainer(for: Recipe.self, configurations: config)
-            let example = Recipe(title: "Example Destination", ingredients: "Example details go here and will automatically expand vertically as they are edited.", instructions: "Opa")
+            let example = Recipe(title: "Example Destination", ingredients: "Example details go here and will automatically expand vertically as they are edited.", instructions: "Opa", favorite: true)
             return EditRecipeView(recipe: example)
                 .modelContainer(container)
         } catch {

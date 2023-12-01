@@ -15,7 +15,7 @@ struct ContentView: View {
     @Query private var categories: [Category]
     @State private var selectedRecipe: Recipe?
     @State private var selectedCategory: Category?
-
+    
     //    @State var isCreateModal: Bool = false
     
     var body: some View {
@@ -74,6 +74,14 @@ struct ContentView: View {
                         }
                     }
                     .toolbar {
+                        ToolbarItem(placement: .navigationBarTrailing) {
+                            Image(systemName: recipe.favorite ? "heart.fill" : "heart").imageScale(.large)
+                                .foregroundColor(recipe.favorite ? .red : .gray)
+                                .onTapGesture {
+                                    recipe.favorite.toggle()
+                                }
+                        }
+                        
                         ToolbarItem(placement: .navigationBarTrailing) {
                             NavigationLink(destination: EditRecipeView(recipe: recipe)) {
                                 Image(systemName: "pencil").imageScale(.large)
@@ -153,7 +161,7 @@ struct ContentView: View {
     
     private func addItem() {
         withAnimation {
-            let newItem = Recipe(title: "Some Item", ingredients: "Some Stuff", instructions: "Do something")
+            let newItem = Recipe(title: "Some Item", ingredients: "Some Stuff", instructions: "Do something", favorite: false)
             modelContext.insert(newItem)
         }
     }

@@ -17,7 +17,7 @@ struct ContentView: View {
     @State private var navigate = false
     
     //    @State private var selectedRecipe: Recipe?
-//        @State private var selectedCategory: String?
+    //        @State private var selectedCategory: String?
     
     //    @State var isCreateModal: Bool = false
     
@@ -164,28 +164,9 @@ struct ContentView: View {
     private var categoriesList: some View {
         List {
             ForEach(categories) { category in
-                NavigationLink {
-                    ScrollView {
-                        VStack {
-                            Markdown {
-                                category.name
-                            }
-                            .padding()
-                        }
-                    }
-                    .toolbar {
-                        ToolbarItem(placement: .navigationBarTrailing) {
-                            NavigationLink(destination: EditCategoryView(category: category)) {
-                                Image(systemName: "pencil").imageScale(.large)
-                            }
-                        }
-                    }
-                } label: {
+                NavigationLink(destination: EditCategoryView(category: category)) {
                     Text(category.name)
                 }
-                //                .onTapGesture {
-                //                    selectedCategory = category
-                //                }
             }
             .onDelete(perform: deleteCategory)
         }
@@ -222,12 +203,12 @@ struct ContentView: View {
         }
     }
     
-//    private func addItem() {
-//        withAnimation {
-//            let newItem = Recipe(title: "Some Item", ingredients: "Some Stuff", instructions: "Do something", favorite: false)
-//            modelContext.insert(newItem)
-//        }
-//    }
+    //    private func addItem() {
+    //        withAnimation {
+    //            let newItem = Recipe(title: "Some Item", ingredients: "Some Stuff", instructions: "Do something", favorite: false)
+    //            modelContext.insert(newItem)
+    //        }
+    //    }
     
     private func deleteItems(offsets: IndexSet) {
         withAnimation {

@@ -11,6 +11,8 @@ import SwiftData
 struct NewRecipeView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.presentationMode) var presentationMode
+    @Query private var categories: [Category]
+
     @State private var title = ""
     @State private var author = ""
     @State private var date = ""
@@ -36,10 +38,9 @@ struct NewRecipeView: View {
             TextField("Instructions", text: $instructions, axis: .vertical)
             TextField("Notes", text: $notes, axis: .vertical)
             Picker("Category", selection: $category) {
-                Text("").tag("")
-                Text("Pork").tag("pork")
-                Text("Chicken").tag("chicken")
-                Text("Steak").tag("steak")
+                ForEach(categories) { category in
+                    Text(category.name).tag(category.name)
+                }
             }
         }
         .navigationBarBackButtonHidden(true)
@@ -65,7 +66,7 @@ struct NewRecipeView: View {
     
     private func addItem() {
         withAnimation {
-            let newItem = Recipe(title: title, ingredients: ingredients, instructions: instructions, favorite: false)
+            let newItem = Recipe(title: title, author: author, date: date, timeRequired: timeRequired, servings: servings, expertiseRequired: expertiseRequired, caloriesPerServing: caloriesPerServing, ingredients: ingredients, instructions: instructions, notes: notes, category: category, favorite: false)
             modelContext.insert(newItem)
         }
     }

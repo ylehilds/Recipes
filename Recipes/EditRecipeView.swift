@@ -14,6 +14,8 @@ struct EditRecipeView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.presentationMode) var presentationMode
     
+    @Query private var categories: [Category]
+    
     var body: some View {
         NavigationView {
             if let recipe {
@@ -22,25 +24,42 @@ struct EditRecipeView: View {
                         TextField("Title", text: Binding(get: { recipe.title }, set: { recipe.title = $0 }), axis: .vertical)
                         //                    TextEditor(text: Binding(get: { recipe.title }, set: { recipe.title = $0 }))
                     }
-                    //            TextField("Author", text: $recipe.author)
-                    //            TextField("Date", text: $recipe.date)
-                    //            TextField("Time Required", text: $recipe.timeRequired)
-                    //            TextField("Servings", text: $recipe.servings)
-                    //            TextField("Expertise Required", text: $recipe.expertiseRequired)
-                    //            TextField("Calories Per Serving", text: $recipe.caloriesPerServing)
+                    Section(header: Text("Author")) {
+                        TextField("Author", text: Binding(get: { recipe.author }, set: { recipe.author = $0 }), axis: .vertical)
+                    }
+                    Section(header: Text("Date")) {
+                        TextField("Date", text: Binding(get: { recipe.date }, set: { recipe.date = $0 }), axis: .vertical)
+                    }
+                    Section(header: Text("Time Required")) {
+                        TextField("Time Required", text: Binding(get: { recipe.timeRequired }, set: { recipe.timeRequired = $0 }), axis: .vertical)
+                    }
+                    Section(header: Text("Servings")) {
+                        TextField("Servings", text: Binding(get: { recipe.servings }, set: { recipe.servings = $0 }), axis: .vertical)
+                    }
+                    Section(header: Text("Expertise Required")) {
+                        TextField("Expertise Required", text: Binding(get: { recipe.expertiseRequired }, set: { recipe.expertiseRequired = $0 }), axis: .vertical)
+                    }
+                    Section(header: Text("Calories Per Serving")) {
+                        TextField("Calories Per Serving", text: Binding(get: { recipe.caloriesPerServing }, set: { recipe.caloriesPerServing = $0 }), axis: .vertical)
+                    }
                     Section(header: Text("Ingredients")) {
                         TextField("Ingredients", text: Binding(get: { recipe.ingredients }, set: { recipe.ingredients = $0 }), axis: .vertical)
                     }
                     Section(header: Text("Instructions")) {
                         TextField("Instructions", text: Binding(get: { recipe.instructions }, set: { recipe.instructions = $0 }), axis: .vertical)
                     }
-                    //            TextEditor(text: $recipe.notes)
-                    //            Picker("Category", selection: $recipe.category) {
-                    //                Text("").tag("")
-                    //                Text("Pork").tag("pork")
-                    //                Text("Chicken").tag("chicken")
-                    //                Text("Steak").tag("steak")
-                    //            }
+                    Section(header: Text("notes")) {
+                        TextField("Notes", text: Binding(get: { recipe.notes }, set: { recipe.notes = $0 }), axis: .vertical)
+                    }
+                    Section(header: Text("Category")) {
+                        Picker("Category", selection: Binding(get: { recipe.category }, set: { newValue in
+                            recipe.category = newValue
+                        })) {
+                            ForEach(categories) { category in
+                                Text(category.name).tag(category.name)
+                            }
+                        }
+                    }
                 }
                 .toolbar {
                     ToolbarItem(placement: ToolbarItemPlacement.principal) {
@@ -60,7 +79,7 @@ struct EditRecipeView_Previews: PreviewProvider {
         do {
             let config = ModelConfiguration(isStoredInMemoryOnly: true)
             let container = try ModelContainer(for: Recipe.self, configurations: config)
-            let example = Recipe(title: "Example Destination", ingredients: "Example details go here and will automatically expand vertically as they are edited.", instructions: "Opa", favorite: true)
+            let example = Recipe(title: "Example Destination", author: "John Doe", date: "11/29/2023", timeRequired: "3 hours", servings: "20", expertiseRequired: "Beginner", caloriesPerServing: "300", ingredients: "Example details go here and will automatically expand vertically as they are edited.", instructions: "Opa", notes: "cook on medium heat", category: "desserts", favorite: true)
             return EditRecipeView(recipe: example)
                 .modelContainer(container)
         } catch {

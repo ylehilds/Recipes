@@ -14,8 +14,17 @@ struct ResponseData: Decodable {
 }
 struct SampleRecipe : Decodable {
     var title: String
+    var author: String
+    var date: String
+    var timeRequired: String
+    var servings: String
+    var expertiseRequired: String
+    var caloriesPerServing: String
     var ingredients: String
     var instructions: String
+    var notes: String
+    var category: String?
+    var favorite: Bool
 }
 
 func loadJson(filename fileName: String) -> [SampleRecipe]? {
@@ -55,6 +64,12 @@ func loadJson(filename fileName: String) -> [SampleRecipe]? {
 let sampleRecipes = [
     Recipe(
         title: "Pfeffernüsse",
+        author: "Lehi Alcantara",
+        date: "11/21/23",
+        timeRequired: "1 hour",
+        servings: "24",
+        expertiseRequired: "Beginner",
+        caloriesPerServing: "200",
         ingredients:"""
             | Quantity       | Ingredient                                                    |
             | --- | --- |
@@ -99,11 +114,18 @@ let sampleRecipes = [
         [Homemade Lebkuchengewürz](https://www.daringgourmet.com/homemade-lebkuchengewuerz-german-gingerbread-spice-blend/)
 
         """,
-        favorite: false,
-        category: "desserts"
+        notes: "cook on medium heat",
+        category: "desserts",
+        favorite: false
     ),
     Recipe(
     title: "Nürnberger Elisenlebkuchen (German Lebkuchen)",
+    author: "John Doe",
+    date: "11/21/23",
+    timeRequired: "2 hours",
+    servings: "30",
+    expertiseRequired: "Intermediate",
+    caloriesPerServing: "500",
     ingredients: """
     - 5 large eggs
     - 275 g packed brown sugar
@@ -157,7 +179,8 @@ let sampleRecipes = [
     - Adjust the amount of almond or hazelnut meal if necessary to achieve the right consistency.
     - The flavor of the Lebkuchen develops and improves over time, so these are great for making ahead.
     """,
-    favorite: false,
-    category: "desserts"
+    notes: "cook on high heat",
+    category: "desserts",
+    favorite: false
 )
 ]

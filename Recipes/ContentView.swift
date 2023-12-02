@@ -79,11 +79,43 @@ struct ContentView: View {
                             }
                             .padding()
                             Markdown {
+                                recipe.author
+                            }
+                            .padding()
+                            Markdown {
+                                recipe.date
+                            }
+                            .padding()
+                            Markdown {
+                                recipe.timeRequired
+                            }
+                            .padding()
+                            Markdown {
+                                recipe.servings
+                            }
+                            .padding()
+                            Markdown {
+                                recipe.expertiseRequired
+                            }
+                            .padding()
+                            Markdown {
+                                recipe.caloriesPerServing
+                            }
+                            .padding()
+                            Markdown {
                                 recipe.ingredients
                             }
                             .padding()
                             Markdown {
                                 recipe.instructions
+                            }
+                            .padding()
+                            Markdown {
+                                recipe.notes
+                            }
+                            .padding()
+                            Markdown {
+                                recipe.category
                             }
                             .padding()
                         }
@@ -190,12 +222,12 @@ struct ContentView: View {
         }
     }
     
-    private func addItem() {
-        withAnimation {
-            let newItem = Recipe(title: "Some Item", ingredients: "Some Stuff", instructions: "Do something", favorite: false)
-            modelContext.insert(newItem)
-        }
-    }
+//    private func addItem() {
+//        withAnimation {
+//            let newItem = Recipe(title: "Some Item", ingredients: "Some Stuff", instructions: "Do something", favorite: false)
+//            modelContext.insert(newItem)
+//        }
+//    }
     
     private func deleteItems(offsets: IndexSet) {
         withAnimation {

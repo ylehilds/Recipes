@@ -11,17 +11,31 @@ import SwiftData
 @Model
 final class Recipe {
     var title: String
+    var author: String
+    var date: String
+    var timeRequired: String
+    var servings: String
+    var expertiseRequired: String
+    var caloriesPerServing: String
     var ingredients: String
     var instructions: String
+    var notes: String
+    var category: String
     var favorite: Bool
-    var category: String?
     
-    init(title: String, ingredients: String, instructions: String, favorite: Bool, category: String? = nil) {
+    init(title: String, author: String, date: String, timeRequired: String, servings: String, expertiseRequired: String, caloriesPerServing: String, ingredients: String, instructions: String, notes: String, category: String, favorite: Bool) {
         self.title = title
+        self.author = author
+        self.date = date
+        self.timeRequired = timeRequired
+        self.servings = servings
+        self.expertiseRequired = expertiseRequired
+        self.caloriesPerServing = caloriesPerServing
         self.ingredients = ingredients
         self.instructions = instructions
-        self.favorite = favorite
+        self.notes = notes
         self.category = category
+        self.favorite = favorite
     }
 }
 

@@ -12,6 +12,7 @@ struct NewCategoryView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.presentationMode) var presentationMode
     @State private var name = ""
+    @State private var showAlert = false
 
     var body: some View {
         Form {
@@ -29,10 +30,15 @@ struct NewCategoryView: View {
             }
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button("Save") {
-                    // Save the new recipe here
-                    // For example, you might save it to your app's data store
-                    addCategory()
-                    presentationMode.wrappedValue.dismiss()
+                    if name.isEmpty {
+                        showAlert = true
+                    } else {
+                        addCategory()
+                        presentationMode.wrappedValue.dismiss()
+                    }
+                }
+                .alert(isPresented: $showAlert) {
+                    Alert(title: Text("Error"), message: Text("Category name is required"), dismissButton: .default(Text("OK")))
                 }
             }
         }

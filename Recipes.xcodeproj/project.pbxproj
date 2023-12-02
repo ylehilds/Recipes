@@ -21,6 +21,7 @@
 		E2D4AB392B1990E100452AD7 /* SampleCategories.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D4AB382B1990E100452AD7 /* SampleCategories.swift */; };
 		E2D4AB402B1999AD00452AD7 /* NewCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D4AB3F2B1999AD00452AD7 /* NewCategoryView.swift */; };
 		E2D4AB422B199B5100452AD7 /* EditCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D4AB412B199B5100452AD7 /* EditCategoryView.swift */; };
+		E2D4AB462B1B07AA00452AD7 /* RecipeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D4AB452B1B07AA00452AD7 /* RecipeDetailView.swift */; };
 		E2DFC54A2B1518080060060B /* NewRecipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DFC5492B1518080060060B /* NewRecipeView.swift */; };
 		E2DFC58A2B17E9B80060060B /* EditRecipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DFC5892B17E9B80060060B /* EditRecipeView.swift */; };
 /* End PBXBuildFile section */
@@ -60,6 +61,7 @@
 		E2D4AB3E2B19987100452AD7 /* SampleCategoryData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = SampleCategoryData.json; sourceTree = "<group>"; };
 		E2D4AB3F2B1999AD00452AD7 /* NewCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCategoryView.swift; sourceTree = "<group>"; };
 		E2D4AB412B199B5100452AD7 /* EditCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCategoryView.swift; sourceTree = "<group>"; };
+		E2D4AB452B1B07AA00452AD7 /* RecipeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailView.swift; sourceTree = "<group>"; };
 		E2DFC5492B1518080060060B /* NewRecipeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewRecipeView.swift; sourceTree = "<group>"; };
 		E2DFC5892B17E9B80060060B /* EditRecipeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditRecipeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -126,6 +128,7 @@
 				E2D4AB3E2B19987100452AD7 /* SampleCategoryData.json */,
 				E2D4AB3F2B1999AD00452AD7 /* NewCategoryView.swift */,
 				E2D4AB412B199B5100452AD7 /* EditCategoryView.swift */,
+				E2D4AB452B1B07AA00452AD7 /* RecipeDetailView.swift */,
 			);
 			path = Recipes;
 			sourceTree = "<group>";
@@ -293,6 +296,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E2CA61B42B0D00780097C530 /* ContentView.swift in Sources */,
+				E2D4AB462B1B07AA00452AD7 /* RecipeDetailView.swift in Sources */,
 				E2D4AB422B199B5100452AD7 /* EditCategoryView.swift in Sources */,
 				E2CA61B62B0D00780097C530 /* Catalog.swift in Sources */,
 				E2CA61B22B0D00780097C530 /* RecipesApp.swift in Sources */,

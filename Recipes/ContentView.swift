@@ -14,12 +14,7 @@ struct ContentView: View {
     @Query private var recipes: [Recipe]
     
     @Query private var categories: [Category]
-    @State private var navigate = false
-    
-    //    @State private var selectedRecipe: Recipe?
-    //        @State private var selectedCategory: String?
-    
-    //    @State var isCreateModal: Bool = false
+    @State private var search = ""
     
     var body: some View {
         NavigationSplitView {
@@ -44,11 +39,8 @@ struct ContentView: View {
                         Text("Browse By Favorites")
                     }
                     
-                    NavigationLink {
-                        Text("Search view")
-                        // TODO: figure this out
-                    } label: {
-                        Text("Search")
+                    NavigationLink(destination: recipeSearch) {
+                        Text("Recipe Search")
                     }
                 }
                 
@@ -72,75 +64,10 @@ struct ContentView: View {
         List {
             ForEach(recipes) { recipe in
                 NavigationLink {
-                    ScrollView {
-                        VStack {
-                            Markdown {
-                                recipe.title
-                            }
-                            .padding()
-                            Markdown {
-                                recipe.author
-                            }
-                            .padding()
-                            Markdown {
-                                recipe.date
-                            }
-                            .padding()
-                            Markdown {
-                                recipe.timeRequired
-                            }
-                            .padding()
-                            Markdown {
-                                recipe.servings
-                            }
-                            .padding()
-                            Markdown {
-                                recipe.expertiseRequired
-                            }
-                            .padding()
-                            Markdown {
-                                recipe.caloriesPerServing
-                            }
-                            .padding()
-                            Markdown {
-                                recipe.ingredients
-                            }
-                            .padding()
-                            Markdown {
-                                recipe.instructions
-                            }
-                            .padding()
-                            Markdown {
-                                recipe.notes
-                            }
-                            .padding()
-                            Markdown {
-                                recipe.category
-                            }
-                            .padding()
-                        }
-                    }
-                    .toolbar {
-                        ToolbarItem(placement: .navigationBarTrailing) {
-                            Image(systemName: recipe.favorite ? "heart.fill" : "heart").imageScale(.large)
-                                .foregroundColor(recipe.favorite ? .red : .gray)
-                                .onTapGesture {
-                                    recipe.favorite.toggle()
-                                }
-                        }
-                        
-                        ToolbarItem(placement: .navigationBarTrailing) {
-                            NavigationLink(destination: EditRecipeView(recipe: recipe)) {
-                                Image(systemName: "pencil").imageScale(.large)
-                            }
-                        }
-                    }
+                    RecipeDetailView(recipe: recipe)
                 } label: {
                     Text(recipe.title)
                 }
-                //                .onTapGesture {
-                //                    selectedRecipe = recipe
-                //                }
             }
             .onDelete(perform: deleteItems)
         }
@@ -203,12 +130,26 @@ struct ContentView: View {
         }
     }
     
-    //    private func addItem() {
-    //        withAnimation {
-    //            let newItem = Recipe(title: "Some Item", ingredients: "Some Stuff", instructions: "Do something", favorite: false)
-    //            modelContext.insert(newItem)
-    //        }
-    //    }
+    private var recipeSearch: some View {
+        VStack {
+            Form {
+                TextField("Search", text: $search)
+            }
+            List {
+                ForEach(recipes.filter { $0.title.contains(search) }) { recipe in
+                    NavigationLink(destination: RecipeDetailView(recipe: recipe)) {
+                        ScrollView {
+                            VStack {
+                                Markdown {
+                                    recipe.title
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
     
     private func deleteItems(offsets: IndexSet) {
         withAnimation {

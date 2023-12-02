@@ -12,6 +12,7 @@ struct NewRecipeView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.presentationMode) var presentationMode
     @Query private var categories: [Category]
+    @State private var showAlert = false
 
     @State private var title = ""
     @State private var author = ""
@@ -38,6 +39,7 @@ struct NewRecipeView: View {
             TextField("Instructions", text: $instructions, axis: .vertical)
             TextField("Notes", text: $notes, axis: .vertical)
             Picker("Category", selection: $category) {
+                Text("").tag("")
                 ForEach(categories) { category in
                     Text(category.name).tag(category.name)
                 }
@@ -55,10 +57,15 @@ struct NewRecipeView: View {
             }
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button("Save") {
-                    // Save the new recipe here
-                    // For example, you might save it to your app's data store
-                    addItem()
-                    presentationMode.wrappedValue.dismiss()
+                    if category.isEmpty || title.isEmpty || author.isEmpty || date.isEmpty || timeRequired.isEmpty || servings.isEmpty || expertiseRequired.isEmpty || caloriesPerServing.isEmpty || ingredients.isEmpty || instructions.isEmpty {
+                        showAlert = true
+                    } else {
+                        addItem()
+                        presentationMode.wrappedValue.dismiss()
+                    }
+                }
+                .alert(isPresented: $showAlert) {
+                    Alert(title: Text("Error"), message: Text("All text fields are required"), dismissButton: .default(Text("OK")))
                 }
             }
         }

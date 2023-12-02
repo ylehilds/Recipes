@@ -13,17 +13,41 @@ struct EditCategoryView: View {
     
     @Environment(\.modelContext) private var modelContext
     @Environment(\.presentationMode) var presentationMode
+    @State private var showAlert = false
+
+    func formIsValid(_ category: Category) -> Bool {
+        !category.name.isEmpty
+    }
 
     var body: some View {
         NavigationView {
             if let category {
                 Form {
                     Section(header: Text("Category")) {
-                        TextField("Category", text: Binding(get: { category.name }, set: { category.name = $0 }), axis: .vertical)
+                        TextField("Category", text: Binding(get: { category.name }, set: { newValue in
+                            category.name = newValue
+                            showAlert = !formIsValid(category)
+                        }), axis: .vertical)
                         // TextEditor(text: Binding(get: { category.name }, set: { category.name = $0 }))
                     }
                 }
                 .toolbar {
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        Button(action: {
+                            if formIsValid(category) {
+                                presentationMode.wrappedValue.dismiss()
+                            } else {
+                                showAlert = true
+                            }
+                        }) {
+                            Image(systemName: "arrow.backward")
+                            Text("Back")
+                        }
+                        .disabled(!formIsValid(category))
+                        .alert(isPresented: $showAlert) {
+                            Alert(title: Text("Error"), message: Text("Category name is required"), dismissButton: .default(Text("OK")))
+                        }
+                    }
                     ToolbarItem(placement: ToolbarItemPlacement.principal) {
                         Text("Edit Category")
                     }
@@ -33,6 +57,7 @@ struct EditCategoryView: View {
                 Text("No Category Selected")
             }
         }
+        .navigationBarBackButtonHidden(true)
     }
 }
 

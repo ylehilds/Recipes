@@ -14,12 +14,14 @@ final class Recipe {
     var ingredients: String
     var instructions: String
     var favorite: Bool
+    var category: String?
     
-    init(title: String, ingredients: String, instructions: String, favorite: Bool) {
+    init(title: String, ingredients: String, instructions: String, favorite: Bool, category: String? = nil) {
         self.title = title
         self.ingredients = ingredients
         self.instructions = instructions
         self.favorite = favorite
+        self.category = category
     }
 }
 

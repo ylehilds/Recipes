@@ -99,7 +99,8 @@ let sampleRecipes = [
         [Homemade Lebkuchengewürz](https://www.daringgourmet.com/homemade-lebkuchengewuerz-german-gingerbread-spice-blend/)
 
         """,
-        favorite: false
+        favorite: false,
+        category: "desserts"
     ),
     Recipe(
     title: "Nürnberger Elisenlebkuchen (German Lebkuchen)",
@@ -156,6 +157,7 @@ let sampleRecipes = [
     - Adjust the amount of almond or hazelnut meal if necessary to achieve the right consistency.
     - The flavor of the Lebkuchen develops and improves over time, so these are great for making ahead.
     """,
-    favorite: false
+    favorite: false,
+    category: "desserts"
 )
 ]

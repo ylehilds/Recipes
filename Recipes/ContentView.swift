@@ -12,9 +12,12 @@ import MarkdownUI
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var recipes: [Recipe]
+    
     @Query private var categories: [Category]
-    @State private var selectedRecipe: Recipe?
-    @State private var selectedCategory: Category?
+    @State private var navigate = false
+    
+    //    @State private var selectedRecipe: Recipe?
+//        @State private var selectedCategory: String?
     
     //    @State var isCreateModal: Bool = false
     
@@ -22,11 +25,23 @@ struct ContentView: View {
         NavigationSplitView {
             List {
                 // A section of top-level abilities like browse all, search, favorites
-                Section(header: Text("Top Level Actions")) {
+                Section(header: Text("Recipes")) {
                     NavigationLink {
-                        browseAllList
+                        browseAllList(recipes: recipes)
                     } label: {
-                        Text("Browse All")
+                        Text("Browse By Title")
+                    }
+                    
+                    NavigationLink {
+                        browseByCategory
+                    } label: {
+                        Text("Browse By Category")
+                    }
+                    
+                    NavigationLink {
+                        browseAllList(recipes: recipes.filter { $0.favorite })
+                    } label: {
+                        Text("Browse By Favorites")
                     }
                     
                     NavigationLink {
@@ -42,18 +57,18 @@ struct ContentView: View {
                     NavigationLink {
                         categoriesList
                     } label: {
-                        Text("Categories")
+                        Text("Categories Editor")
                     }
                 }
             }
         } content: {
-            browseAllList
+            browseAllList(recipes: recipes)
         } detail: {
             Text("Select an item")
         }
     }
     
-    private var browseAllList: some View {
+    private func browseAllList(recipes: [Recipe]) -> some View {
         List {
             ForEach(recipes) { recipe in
                 NavigationLink {
@@ -91,9 +106,9 @@ struct ContentView: View {
                 } label: {
                     Text(recipe.title)
                 }
-                .onTapGesture {
-                    selectedRecipe = recipe
-                }
+                //                .onTapGesture {
+                //                    selectedRecipe = recipe
+                //                }
             }
             .onDelete(perform: deleteItems)
         }
@@ -136,9 +151,9 @@ struct ContentView: View {
                 } label: {
                     Text(category.name)
                 }
-                .onTapGesture {
-                    selectedCategory = category
-                }
+                //                .onTapGesture {
+                //                    selectedCategory = category
+                //                }
             }
             .onDelete(perform: deleteCategory)
         }
@@ -154,6 +169,22 @@ struct ContentView: View {
             ToolbarItem {
                 NavigationLink(destination: NewCategoryView()) {
                     Image(systemName: "plus").imageScale(.large)
+                }
+            }
+        }
+    }
+    
+    private var browseByCategory: some View {
+        List {
+            ForEach(categories) { category in
+                NavigationLink(destination: browseAllList(recipes: recipes.filter { $0.category == category.name })) {
+                    ScrollView {
+                        VStack {
+                            Markdown {
+                                category.name
+                            }
+                        }
+                    }
                 }
             }
         }

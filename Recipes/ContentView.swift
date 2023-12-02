@@ -135,8 +135,11 @@ struct ContentView: View {
             Form {
                 TextField("Search", text: $search)
             }
+            if search.isEmpty {
+                Text("Enter a search term (title, ingredients, or notes)")
+            }
             List {
-                ForEach(recipes.filter { $0.title.contains(search) }) { recipe in
+                ForEach(recipes.filter { $0.title.lowercased().contains(search.lowercased()) || $0.ingredients.lowercased().contains(search.lowercased()) || $0.notes.lowercased().contains(search.lowercased()) }) { recipe in
                     NavigationLink(destination: RecipeDetailView(recipe: recipe)) {
                         ScrollView {
                             VStack {

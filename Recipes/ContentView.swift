@@ -11,9 +11,9 @@ import MarkdownUI
 
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
-    @Query private var recipes: [Recipe]
+    @Query(sort: [SortDescriptor(\Recipe.title)]) private var recipes: [Recipe]
     
-    @Query private var categories: [Category]
+    @Query(sort: [SortDescriptor(\Category.name)]) private var categories: [Category]
     @State private var search = ""
     
     var body: some View {

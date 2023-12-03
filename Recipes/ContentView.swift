@@ -91,7 +91,24 @@ struct ContentView: View {
     private var categoriesList: some View {
         List {
             ForEach(categories) { category in
-                NavigationLink(destination: EditCategoryView(category: category)) {
+                NavigationLink {
+                    ScrollView {
+                        VStack {
+                            Markdown {
+                                category.name
+                            }
+                            .padding()
+                        }
+                    }
+                    .toolbar {
+                        ToolbarItem(placement: .navigationBarTrailing) {
+                            NavigationLink(destination: EditCategoryView(category: category)) {
+                                Image(systemName: "pencil").imageScale(.large)
+                            }
+                        }
+                    }
+                }
+                label: {
                     Text(category.name)
                 }
             }

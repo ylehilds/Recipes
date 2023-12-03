@@ -13,67 +13,78 @@ struct RecipeDetailView: View {
     let recipe: Recipe?
     
     var body: some View {
-        if let recipe {
-            ScrollView {
-                VStack {
-                    Markdown {
-                        recipe.title
-                    }
-                    .padding()
-                    Markdown {
-                        recipe.author
-                    }
-                    .padding()
-                    Markdown {
-                        recipe.date
-                    }
-                    .padding()
-                    Markdown {
-                        recipe.timeRequired
-                    }
-                    .padding()
-                    Markdown {
-                        recipe.servings
-                    }
-                    .padding()
-                    Markdown {
-                        recipe.expertiseRequired
-                    }
-                    .padding()
-                    Markdown {
-                        recipe.caloriesPerServing
-                    }
-                    .padding()
-                    Markdown {
-                        recipe.ingredients
-                    }
-                    .padding()
-                    Markdown {
-                        recipe.instructions
-                    }
-                    .padding()
-                    Markdown {
-                        recipe.notes
-                    }
-                    .padding()
-                    Markdown {
-                        recipe.category
-                    }
-                    .padding()
-                }
-            }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Image(systemName: recipe.favorite ? "heart.fill" : "heart").imageScale(.large)
-                        .foregroundColor(recipe.favorite ? .red : .gray)
-                        .onTapGesture {
-                            recipe.favorite.toggle()
+        NavigationStack {
+            ZStack {
+                if let recipe {
+                    ScrollView {
+                        VStack {
+                            Markdown {
+                                recipe.title
+                            }
+                            .padding()
+                            Markdown {
+                                recipe.author
+                            }
+                            .padding()
+                            Markdown {
+                                recipe.date
+                            }
+                            .padding()
+                            Markdown {
+                                recipe.timeRequired
+                            }
+                            .padding()
+                            Markdown {
+                                recipe.servings
+                            }
+                            .padding()
+                            Markdown {
+                                recipe.expertiseRequired
+                            }
+                            .padding()
+                            Markdown {
+                                recipe.caloriesPerServing
+                            }
+                            .padding()
+                            Markdown {
+                                recipe.ingredients
+                            }
+                            .padding()
+                            Markdown {
+                                recipe.instructions
+                            }
+                            .padding()
+                            Markdown {
+                                recipe.notes
+                            }
+                            .padding()
+                            Markdown {
+                                recipe.category
+                            }
+                            .padding()
                         }
-                }
-                
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    NavigationLink(destination: EditRecipeView(recipe: recipe)) {
-                        Image(systemName: "pencil").imageScale(.large)
+                    }
+                    .toolbar {
+                        ToolbarItem(placement: .navigationBarTrailing) {
+                            Image(systemName: recipe.favorite ? "heart.fill" : "heart").imageScale(.large)
+                                .foregroundColor(recipe.favorite ? .red : .gray)
+                                .onTapGesture {
+                                    recipe.favorite.toggle()
+                                }
+                        }
+                        
+                        ToolbarItem(placement: .navigationBarTrailing) {
+                            NavigationStack {
+                                ZStack {
+                                    NavigationLink(destination: EditRecipeView(recipe: recipe)) {
+                                        Image(systemName: "pencil").imageScale(.large)
+                                    }
+                                }
+                                .navigationDestination(for: String.self) { text in
+                                    Text(verbatim: text)
+                                }
+                            }
+                        }
                     }
                 }
             }

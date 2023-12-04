@@ -17,7 +17,7 @@ struct ContentView: View {
     @State private var search = ""
     @State private var showingCreateRecipeSheet = false
     @State private var showingCreateCategorySheet = false
-    @State private var selectedRecipe: Recipe?
+//    @State private var selectedRecipe: Recipe?
     
     var body: some View {
         NavigationSplitView {
@@ -74,12 +74,12 @@ struct ContentView: View {
         } detail: {
             NavigationStack {
                 
-                            if let selectedRecipe = selectedRecipe {
-                                RecipeDetailView(recipe: selectedRecipe)
-                            } else {
-                                Text("select a recipe")
-                            }
-//                Text("select a recipe")
+//                            if let selectedRecipe = selectedRecipe {
+//                                RecipeDetailView(recipe: selectedRecipe)
+//                            } else {
+//                                Text("select a recipe")
+//                            }
+                Text("select a recipe")
             }
         }
         .onAppear {
@@ -99,8 +99,8 @@ struct ContentView: View {
     }
     
     private func browseAllList(recipes: [Recipe]) -> some View {
-        List(selection: $selectedRecipe) {
-//            List {
+//        List(selection: $selectedRecipe) {
+            List {
             if recipes.count == 0 {
                 Text("No recipes yet. Tap the + button to add a recipe.")
             } else {
@@ -110,8 +110,8 @@ struct ContentView: View {
                 //                        Text(recipe.title)
                 //                    }
                                 ForEach(recipes) { recipe in
-                                    NavigationLink(recipe.title, value:recipe)
-//                                    NavigationLink(recipe.title) { RecipeDetailView(recipe: recipe) }
+//                                    NavigationLink(recipe.title, value:recipe)
+                                    NavigationLink(recipe.title) { RecipeDetailView(recipe: recipe) }
                                 }
                                 .onDelete(perform: deleteItems)
 //                ForEach(recipes) { recipe in

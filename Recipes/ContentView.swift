@@ -15,6 +15,7 @@ struct ContentView: View {
     
     @Query(sort: [SortDescriptor(\Category.name)]) private var categories: [Category]
     @State private var search = ""
+    @State private var showingCreateRecipeSheet = false
     
     var body: some View {
         NavigationSplitView {
@@ -81,8 +82,18 @@ struct ContentView: View {
                 }
             }
             ToolbarItem {
-                NavigationLink(destination: NewRecipeView()) {
+                Button(action: {
+                    showingCreateRecipeSheet.toggle()
+                }) {
                     Image(systemName: "plus").imageScale(.large)
+                }
+                .sheet(isPresented: $showingCreateRecipeSheet) {
+                    NewRecipeView()
+                }
+            }
+            ToolbarItem {
+                NavigationLink(destination: NewRecipeView()) {
+                    Image(systemName: "plus.app").imageScale(.large)
                 }
             }
         }

@@ -13,8 +13,8 @@ struct RecipeDetailView: View {
     let recipe: Recipe?
     
     var body: some View {
-        NavigationStack {
-            ZStack {
+//        NavigationStack {
+//            ZStack {
                 if let recipe = recipe {
                     ScrollView {
                         VStack {
@@ -88,11 +88,11 @@ struct RecipeDetailView: View {
                     }
                 }
                 else {
-                    Text("No recipe!")
+                    Text("Select a Recipe!")
                 }
             }
-        }
-    }
+//        }
+//    }
 }
 
 

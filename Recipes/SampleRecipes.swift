@@ -115,7 +115,7 @@ let sampleRecipes = [
 
         """,
         notes: "cook on medium heat",
-        category: "desserts",
+        category: "Desserts",
         favorite: false
     ),
     Recipe(
@@ -180,7 +180,7 @@ let sampleRecipes = [
     - The flavor of the Lebkuchen develops and improves over time, so these are great for making ahead.
     """,
     notes: "cook on high heat",
-    category: "desserts",
+    category: "Desserts",
     favorite: false
 )
 ]

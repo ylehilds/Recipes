@@ -30,18 +30,7 @@ func loadJson(filename fileName: String) -> [SampleCategory]? {
 }
 
 let sampleCategories = [
-    Category( name: "main dish" ),
-    Category( name: "side dish" ),
     Category( name: "desserts" ),
-    Category( name: "breads" ),
     Category( name: "healthy" ),
-    Category( name: "fusion" ),
-    Category( name: "comfort" ),
-    Category( name: "lunch" ),
-    Category( name: "dinner" ),
-    Category( name: "breakfast" ),
-    Category( name: "quick" ),
-    Category( name: "gourmet" ),
-    Category( name: "smoothies" ),
-    Category( name: "snacks" )
+    Category( name: "comfort" )
 ]

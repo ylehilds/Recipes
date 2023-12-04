@@ -17,7 +17,6 @@ struct ContentView: View {
     @State private var search = ""
     @State private var showingCreateRecipeSheet = false
     @State private var showingCreateCategorySheet = false
-//    @State private var selectedRecipe: Recipe?
     
     var body: some View {
         NavigationSplitView {
@@ -29,12 +28,6 @@ struct ContentView: View {
                     } label: {
                         Text("Browse By Title")
                     }
-//                    NavigationLink {
-//                        browseByCategory
-//                    } label: {
-//                        Text("Browse By Category")
-//                    }
-                    
                     NavigationLink {
                         browseFavoritesList(recipes: recipes.filter { $0.favorite })
                     } label: {
@@ -73,12 +66,6 @@ struct ContentView: View {
             browseAllList(recipes: recipes)
         } detail: {
             NavigationStack {
-                
-//                            if let selectedRecipe = selectedRecipe {
-//                                RecipeDetailView(recipe: selectedRecipe)
-//                            } else {
-//                                Text("select a recipe")
-//                            }
                 Text("select a recipe")
             }
         }
@@ -99,41 +86,16 @@ struct ContentView: View {
     }
     
     private func browseAllList(recipes: [Recipe]) -> some View {
-//        List(selection: $selectedRecipe) {
             List {
             if recipes.count == 0 {
                 Text("No recipes yet. Tap the + button to add a recipe.")
             } else {
-                //                ForEach(recipes, id: \.self, selection: $selectedRecipe) { recipe in
-                // this commented out code is the ios 17 preferred way, but it doesn't work well with the split view. I had to change it to the deprecated way below (ios 16) and use a state variable to track the selected recipe and check for selectedRecipe in the detail view.
-                //                    NavigationLink(destination: RecipeDetailView(recipe: recipe)) {
-                //                        Text(recipe.title)
-                //                    }
                                 ForEach(recipes) { recipe in
-//                                    NavigationLink(recipe.title, value:recipe)
                                     NavigationLink(recipe.title) { RecipeDetailView(recipe: recipe) }
                                 }
                                 .onDelete(perform: deleteItems)
-//                ForEach(recipes) { recipe in
-//                    NavigationLink(
-//                        destination: RecipeDetailView(recipe: recipe),
-//                        tag: recipe,
-//                        selection: $selectedRecipe
-//                    ) {
-//                        Text(recipe.title)
-//                    }
-//                }
-//                .onDelete(perform: deleteItems)
             }
         }
-//        .onChange(of: selectedRecipe) { newValue in
-//            if let selectedRecipe = newValue {
-//                print("Selected recipe: \(selectedRecipe.title)")
-//            }
-//        }
-        //                .onDelete(perform: deleteItems)
-        
-        
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 EditButton()
@@ -212,22 +174,6 @@ struct ContentView: View {
                 }
                 .sheet(isPresented: $showingCreateCategorySheet) {
                     NewCategoryView()
-                }
-            }
-        }
-    }
-    
-    private var browseByCategory: some View {
-        List {
-            ForEach(categories) { category in
-                NavigationLink(destination: browseAllList(recipes: recipes.filter { $0.category == category.name })) {
-                    ScrollView {
-                        VStack {
-                            Markdown {
-                                category.name
-                            }
-                        }
-                    }
                 }
             }
         }

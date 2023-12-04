@@ -30,7 +30,7 @@ func loadJson(filename fileName: String) -> [SampleCategory]? {
 }
 
 let sampleCategories = [
-    Category( name: "desserts" ),
-    Category( name: "healthy" ),
-    Category( name: "comfort" )
+    Category( name: "Desserts" ),
+    Category( name: "Healthy" ),
+    Category( name: "Comfort" )
 ]

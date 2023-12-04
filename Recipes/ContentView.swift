@@ -39,7 +39,7 @@ struct ContentView: View {
                     }
                 }
                 
-                Section(header: Text("Categories to Pick From")) {
+                Section(header: Text("Recipes by Categories")) {
                     ForEach(categories) { category in
                         NavigationLink(destination: browseAllList(recipes: recipes.filter { $0.category == category.name })) {
                             ScrollView {

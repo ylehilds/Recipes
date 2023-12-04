@@ -64,14 +64,18 @@ struct ContentView: View {
     
     private func browseAllList(recipes: [Recipe]) -> some View {
         List {
-            ForEach(recipes) { recipe in
-                NavigationLink {
-                    RecipeDetailView(recipe: recipe)
-                } label: {
-                    Text(recipe.title)
+            if recipes.count == 0 {
+                Text("No recipes yet. Tap the + button to add a recipe.")
+            } else {
+                ForEach(recipes) { recipe in
+                    NavigationLink {
+                        RecipeDetailView(recipe: recipe)
+                    } label: {
+                        Text(recipe.title)
+                    }
                 }
+                .onDelete(perform: deleteItems)
             }
-            .onDelete(perform: deleteItems)
         }
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
@@ -128,9 +132,9 @@ struct ContentView: View {
                         }
                     }
                 }
-                label: {
-                    Text(category.name)
-                }
+            label: {
+                Text(category.name)
+            }
             }
             .onDelete(perform: deleteCategory)
         }

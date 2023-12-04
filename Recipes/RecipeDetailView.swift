@@ -15,7 +15,7 @@ struct RecipeDetailView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                if let recipe {
+                if let recipe = recipe {
                     ScrollView {
                         VStack {
                             Markdown {
@@ -86,6 +86,9 @@ struct RecipeDetailView: View {
                             }
                         }
                     }
+                }
+                else {
+                    Text("No recipe!")
                 }
             }
         }

@@ -15,20 +15,16 @@ struct NewCategoryView: View {
     @State private var showAlert = false
 
     var body: some View {
-        Form {
-            TextField("Name", text: $name)
-        }
-        .navigationBarBackButtonHidden(true)
-        .toolbar {
-            ToolbarItem(placement: .navigationBarLeading) {
+        VStack {
+            HStack {
                 Button("Cancel") {
                     presentationMode.wrappedValue.dismiss()
                 }
-            }
-            ToolbarItem(placement: ToolbarItemPlacement.principal) {
-                Text("New Category")
-            }
-            ToolbarItem(placement: .navigationBarTrailing) {
+                Spacer()
+                
+                Text("New Category").font(.headline)
+                Spacer()
+                
                 Button("Save") {
                     if name.isEmpty {
                         showAlert = true
@@ -40,6 +36,10 @@ struct NewCategoryView: View {
                 .alert(isPresented: $showAlert) {
                     Alert(title: Text("Error"), message: Text("Category name is required"), dismissButton: .default(Text("OK")))
                 }
+            }
+            .padding()
+            Form {
+                TextField("Name", text: $name)
             }
         }
     }

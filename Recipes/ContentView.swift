@@ -16,6 +16,7 @@ struct ContentView: View {
     @Query(sort: [SortDescriptor(\Category.name)]) private var categories: [Category]
     @State private var search = ""
     @State private var showingCreateRecipeSheet = false
+    @State private var showingCreateCategorySheet = false
     
     var body: some View {
         NavigationSplitView {
@@ -35,7 +36,7 @@ struct ContentView: View {
                     }
                     
                     NavigationLink {
-                        browseAllList(recipes: recipes.filter { $0.favorite })
+                        browseFavoritesList(recipes: recipes.filter { $0.favorite })
                     } label: {
                         Text("Browse By Favorites")
                     }
@@ -91,11 +92,19 @@ struct ContentView: View {
                     NewRecipeView()
                 }
             }
-            ToolbarItem {
-                NavigationLink(destination: NewRecipeView()) {
-                    Image(systemName: "plus.app").imageScale(.large)
+        }
+    }
+    
+    private func browseFavoritesList(recipes: [Recipe]) -> some View {
+        List {
+            ForEach(recipes) { recipe in
+                NavigationLink {
+                    RecipeDetailView(recipe: recipe)
+                } label: {
+                    Text(recipe.title)
                 }
             }
+            .onDelete(perform: deleteItems)
         }
     }
     
@@ -135,8 +144,13 @@ struct ContentView: View {
                 }
             }
             ToolbarItem {
-                NavigationLink(destination: NewCategoryView()) {
+                Button(action: {
+                    showingCreateCategorySheet.toggle()
+                }) {
                     Image(systemName: "plus").imageScale(.large)
+                }
+                .sheet(isPresented: $showingCreateCategorySheet) {
+                    NewCategoryView()
                 }
             }
         }

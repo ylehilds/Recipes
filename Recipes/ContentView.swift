@@ -63,7 +63,7 @@ struct ContentView: View {
                 }
             }
         } content: {
-            browseAllList(recipes: recipes)
+            Text("select a menu item")
         } detail: {
             NavigationStack {
                 Text("select a recipe")

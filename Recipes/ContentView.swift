@@ -58,7 +58,7 @@ struct ContentView: View {
         } content: {
             browseAllList(recipes: recipes)
         } detail: {
-            Text("Select an item")
+            Text("Select a recipe")
         }
     }
     

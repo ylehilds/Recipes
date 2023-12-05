@@ -86,25 +86,25 @@ struct ContentView: View {
     }
     
     private func browseAllList(recipes: [Recipe]) -> some View {
-            List {
+        List {
             if recipes.count == 0 {
                 Text("No recipes yet. Tap the + button to add a recipe.")
             } else {
-                                ForEach(recipes) { recipe in
-                                    NavigationLink(recipe.title) { RecipeDetailView(recipe: recipe) }
-                                }
-                                .onDelete(perform: deleteItems)
+                ForEach(recipes) { recipe in
+                    NavigationLink(recipe.title) { RecipeDetailView(recipe: recipe) }
+                }
+                .onDelete(perform: deleteItems)
             }
         }
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 EditButton()
             }
-//            ToolbarItem {
-//                Button(action: initializeRecipes) {
-//                    Label("Initialize", systemImage: "folder.badge.plus")
-//                }
-//            }
+            //            ToolbarItem {
+            //                Button(action: initializeRecipes) {
+            //                    Label("Initialize", systemImage: "folder.badge.plus")
+            //                }
+            //            }
             ToolbarItem {
                 Button(action: {
                     showingCreateRecipeSheet.toggle()
@@ -161,11 +161,11 @@ struct ContentView: View {
             ToolbarItem(placement: .navigationBarTrailing) {
                 EditButton()
             }
-//            ToolbarItem {
-//                Button(action: initializeCategories) {
-//                    Label("Initialize", systemImage: "folder.badge.plus")
-//                }
-//            }
+            //            ToolbarItem {
+            //                Button(action: initializeCategories) {
+            //                    Label("Initialize", systemImage: "folder.badge.plus")
+            //                }
+            //            }
             ToolbarItem {
                 Button(action: {
                     showingCreateCategorySheet.toggle()

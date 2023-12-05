@@ -13,7 +13,7 @@ struct NewCategoryView: View {
     @Environment(\.presentationMode) var presentationMode
     @State private var name = ""
     @State private var showAlert = false
-
+    
     var body: some View {
         VStack {
             HStack {

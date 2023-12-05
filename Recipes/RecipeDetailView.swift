@@ -13,102 +13,89 @@ struct RecipeDetailView: View {
     let recipe: Recipe?
     
     var body: some View {
-//        NavigationStack {
-//            ZStack {
-                if let recipe = recipe {
-                    ScrollView {
-                        VStack {
-                            Markdown {
-                                recipe.title
-                            }
-                            .padding()
-                            Markdown {
-                                recipe.author
-                            }
-                            .padding()
-                            Markdown {
-                                recipe.date
-                            }
-                            .padding()
-                            Markdown {
-                                recipe.timeRequired
-                            }
-                            .padding()
-                            Markdown {
-                                recipe.servings
-                            }
-                            .padding()
-                            Markdown {
-                                recipe.expertiseRequired
-                            }
-                            .padding()
-                            Markdown {
-                                recipe.caloriesPerServing
-                            }
-                            .padding()
-                            Markdown {
-                                recipe.ingredients
-                            }
-                            .padding()
-                            Markdown {
-                                recipe.instructions
-                            }
-                            .padding()
-                            Markdown {
-                                recipe.notes
-                            }
-                            .padding()
-                            Markdown {
-                                recipe.category
-                            }
-                            .padding()
-                        }
+        //        NavigationStack {
+        //            ZStack {
+        if let recipe = recipe {
+            ScrollView {
+                VStack {
+                    Markdown {
+                        recipe.title
                     }
-                    .toolbar {
-                        ToolbarItem(placement: .navigationBarTrailing) {
-                            Image(systemName: recipe.favorite ? "heart.fill" : "heart").imageScale(.large)
-                                .foregroundColor(recipe.favorite ? .red : .gray)
-                                .onTapGesture {
-                                    recipe.favorite.toggle()
-                                }
-                        }
-                        
-                        ToolbarItem(placement: .navigationBarTrailing) {
-                            NavigationStack {
-                                ZStack {
-                                    NavigationLink(destination: EditRecipeView(recipe: recipe)) {
-                                        Image(systemName: "pencil").imageScale(.large)
-                                    }
-                                }
-                                .navigationDestination(for: String.self) { text in
-                                    Text(verbatim: text)
-                                }
-                            }
-                        }
+                    .padding()
+                    Markdown {
+                        recipe.author
                     }
-                }
-                else {
-                    Text("Select a Recipe!")
+                    .padding()
+                    Markdown {
+                        recipe.date
+                    }
+                    .padding()
+                    Markdown {
+                        recipe.timeRequired
+                    }
+                    .padding()
+                    Markdown {
+                        recipe.servings
+                    }
+                    .padding()
+                    Markdown {
+                        recipe.expertiseRequired
+                    }
+                    .padding()
+                    Markdown {
+                        recipe.caloriesPerServing
+                    }
+                    .padding()
+                    Markdown {
+                        recipe.ingredients
+                    }
+                    .padding()
+                    Markdown {
+                        recipe.instructions
+                    }
+                    .padding()
+                    Markdown {
+                        recipe.notes
+                    }
+                    .padding()
+                    Markdown {
+                        recipe.category
+                    }
+                    .padding()
                 }
             }
-//        }
-//    }
-}
-
-struct RecipeDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        do {
-            let schema = Schema([
-                Recipe.self,
-                Category.self
-            ])
-            let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: true)
-            let container = try ModelContainer(for: schema, configurations: [modelConfiguration])
-            let example = Recipe(title: "Example Destination", author: "John Doe", date: "11/29/2023", timeRequired: "3 hours", servings: "20", expertiseRequired: "Beginner", caloriesPerServing: "300", ingredients: "Example details go here and will automatically expand vertically as they are edited.", instructions: "Opa", notes: "cook on medium heat", category: "desserts", favorite: true)
-            return EditRecipeView(recipe: example)
-                .modelContainer(container)
-        } catch {
-            fatalError("Failed to create model container.")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Image(systemName: recipe.favorite ? "heart.fill" : "heart").imageScale(.large)
+                        .foregroundColor(recipe.favorite ? .red : .gray)
+                        .onTapGesture {
+                            recipe.favorite.toggle()
+                        }
+                }
+                
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    NavigationStack {
+                        ZStack {
+                            NavigationLink(destination: EditRecipeView(recipe: recipe)) {
+                                Image(systemName: "pencil").imageScale(.large)
+                            }
+                        }
+                        .navigationDestination(for: String.self) { text in
+                            Text(verbatim: text)
+                        }
+                    }
+                }
+            }
+        }
+        else {
+            Text("Select a Recipe!")
         }
     }
+    //        }
+    //    }
+}
+
+#Preview {
+    let recipe = Recipe(title: "Example Destination", author: "John Doe", date: "11/29/2023", timeRequired: "3 hours", servings: "20", expertiseRequired: "Beginner", caloriesPerServing: "300", ingredients: "Example details go here and will automatically expand vertically as they are edited.", instructions: "Opa", notes: "cook on medium heat", category: "desserts", favorite: true)
+    return RecipeDetailView(recipe: recipe)
 }

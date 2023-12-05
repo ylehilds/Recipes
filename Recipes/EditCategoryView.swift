@@ -64,23 +64,6 @@ struct EditCategoryView: View {
 }
 
 #Preview {
-    EditCategoryView()
-}
-
-struct EditCategoryView_Previews: PreviewProvider {
-    static var previews: some View {
-        do {
-            let schema = Schema([
-                Recipe.self,
-                Category.self
-            ])
-            let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: true)
-            let container = try ModelContainer(for: schema, configurations: [modelConfiguration])
-            let example = Category(name: "Desserts")
-            return EditCategoryView(category: example)
-                .modelContainer(container)
-        } catch {
-            fatalError("Failed to create model container.")
-        }
-    }
+    let category = Category(name: "Desserts")
+    return EditCategoryView(category: category)
 }

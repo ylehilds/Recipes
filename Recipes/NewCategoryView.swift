@@ -46,8 +46,8 @@ struct NewCategoryView: View {
     
     private func addCategory() {
         withAnimation {
-            let newCategory = Category(name: name)
-            modelContext.insert(newCategory)
+            let category = Category(name: name)
+            modelContext.insert(category)
         }
     }
 }

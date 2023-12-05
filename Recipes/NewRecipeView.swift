@@ -73,8 +73,8 @@ struct NewRecipeView: View {
     
     private func addItem() {
         withAnimation {
-            let newItem = Recipe(title: title, author: author, date: date, timeRequired: timeRequired, servings: servings, expertiseRequired: expertiseRequired, caloriesPerServing: caloriesPerServing, ingredients: ingredients, instructions: instructions, notes: notes, category: category, favorite: false)
-            modelContext.insert(newItem)
+            let recipe = Recipe(title: title, author: author, date: date, timeRequired: timeRequired, servings: servings, expertiseRequired: expertiseRequired, caloriesPerServing: caloriesPerServing, ingredients: ingredients, instructions: instructions, notes: notes, category: category, favorite: false)
+            modelContext.insert(recipe)
         }
     }
 }

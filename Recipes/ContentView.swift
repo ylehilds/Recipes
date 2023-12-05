@@ -254,5 +254,4 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
-        .modelContainer(for: [Recipe.self, Category.self], inMemory: true)
 }

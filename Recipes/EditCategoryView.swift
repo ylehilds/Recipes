@@ -70,9 +70,13 @@ struct EditCategoryView: View {
 struct EditCategoryView_Previews: PreviewProvider {
     static var previews: some View {
         do {
-            let config = ModelConfiguration(isStoredInMemoryOnly: true)
-            let container = try ModelContainer(for: Category.self, configurations: config)
-            let example = Category(name: "main dishes")
+            let schema = Schema([
+                Recipe.self,
+                Category.self
+            ])
+            let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: true)
+            let container = try ModelContainer(for: schema, configurations: [modelConfiguration])
+            let example = Category(name: "Desserts")
             return EditCategoryView(category: example)
                 .modelContainer(container)
         } catch {

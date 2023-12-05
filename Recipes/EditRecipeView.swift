@@ -130,8 +130,12 @@ struct EditRecipeView: View {
 struct EditRecipeView_Previews: PreviewProvider {
     static var previews: some View {
         do {
-            let config = ModelConfiguration(isStoredInMemoryOnly: true)
-            let container = try ModelContainer(for: Recipe.self, configurations: config)
+            let schema = Schema([
+                Recipe.self,
+                Category.self
+            ])
+            let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: true)
+            let container = try ModelContainer(for: schema, configurations: [modelConfiguration])
             let example = Recipe(title: "Example Destination", author: "John Doe", date: "11/29/2023", timeRequired: "3 hours", servings: "20", expertiseRequired: "Beginner", caloriesPerServing: "300", ingredients: "Example details go here and will automatically expand vertically as they are edited.", instructions: "Opa", notes: "cook on medium heat", category: "desserts", favorite: true)
             return EditRecipeView(recipe: example)
                 .modelContainer(container)

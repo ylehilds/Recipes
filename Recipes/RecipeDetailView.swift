@@ -12,6 +12,23 @@ import MarkdownUI
 struct RecipeDetailView: View {
     let recipe: Recipe?
     
+    var shareContent: String {
+                        guard let recipe = recipe else { return "" }
+                        return """
+                        ## \(recipe.title)
+                        **Author:** \(recipe.author)
+                        **Date:** \(recipe.date)
+                        **Time Required:** \(recipe.timeRequired)
+                        **Servings:** \(recipe.servings)
+                        **Expertise Required**: \(recipe.expertiseRequired)
+                        **Calories Per Serving**: \(recipe.caloriesPerServing)
+                        \(recipe.ingredients)
+                        \(recipe.instructions)
+                        \(recipe.notes)
+                        **Category**: \(recipe.category)
+                        """
+                    }
+    
     var body: some View {
         //        NavigationStack {
         //            ZStack {
@@ -62,6 +79,9 @@ struct RecipeDetailView: View {
                             Text(verbatim: text)
                         }
                     }
+                }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    ShareLink(item: shareContent)
                 }
             }
         }

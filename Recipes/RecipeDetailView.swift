@@ -18,50 +18,28 @@ struct RecipeDetailView: View {
         if let recipe = recipe {
             ScrollView {
                 VStack {
-                    Markdown {
-                        recipe.title
-                    }
-                    .padding()
-                    Markdown {
-                        recipe.author
-                    }
-                    .padding()
-                    Markdown {
-                        recipe.date
-                    }
-                    .padding()
-                    Markdown {
-                        recipe.timeRequired
-                    }
-                    .padding()
-                    Markdown {
-                        recipe.servings
-                    }
-                    .padding()
-                    Markdown {
-                        recipe.expertiseRequired
-                    }
-                    .padding()
-                    Markdown {
-                        recipe.caloriesPerServing
-                    }
-                    .padding()
-                    Markdown {
-                        recipe.ingredients
-                    }
-                    .padding()
-                    Markdown {
-                        recipe.instructions
-                    }
-                    .padding()
-                    Markdown {
-                        recipe.notes
-                    }
-                    .padding()
-                    Markdown {
-                        recipe.category
-                    }
-                    .padding()
+                    Markdown ("## \(recipe.title)")
+                        .padding()
+                    Markdown ("**Author:** \(recipe.author)")
+                        .padding()
+                    Markdown ("**Date:** \(recipe.date)")
+                        .padding()
+                    Markdown ("**Time Required:** \(recipe.timeRequired)")
+                        .padding()
+                    Markdown ("**Servings:** \(recipe.servings)")
+                        .padding()
+                    Markdown ("**Expertise Required**: \(recipe.expertiseRequired)")
+                        .padding()
+                    Markdown ("**Calories Per Serving**: \(recipe.caloriesPerServing)")
+                        .padding()
+                    Markdown ("\(recipe.ingredients)")
+                        .padding()
+                    Markdown ("\(recipe.instructions)")
+                        .padding()
+                    Markdown ("\(recipe.notes)")
+                        .padding()
+                    Markdown ("**Category**: \(recipe.category)")
+                        .padding()
                 }
             }
             .toolbar {

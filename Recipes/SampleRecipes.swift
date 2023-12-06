@@ -71,6 +71,8 @@ let sampleRecipes = [
         expertiseRequired: "Beginner",
         caloriesPerServing: "200",
         ingredients:"""
+            ## Ingredients
+            
             | Quantity       | Ingredient                                                    |
             | --- | --- |
             | 320g           | Bread flour                                                   |
@@ -104,8 +106,6 @@ let sampleRecipes = [
         6. **Bake:** Preheat the oven to 375 degrees F (190 degrees C). Bake the chilled dough balls for approximately 10 minutes.
         7. **Cool and Glaze:** Allow the baked cookies to cool completely. Then, dip them into the glaze of your choice. If the glaze is too thick, thin it with a little hot water until you reach the desired consistency.
 
-        **Note:** For a milder flavor, omit the ginger and black pepper. To add more 'kick,' increase the quantities of these spices according to your taste.
-
         **Optional Decoration:** Consider adding a chocolate drizzle, orange zest, and lemon zest for extra flavor and decoration.
 
         ## Lebkuchengewürz (German Gingerbread Spice Blend)
@@ -114,7 +114,11 @@ let sampleRecipes = [
         [Homemade Lebkuchengewürz](https://www.daringgourmet.com/homemade-lebkuchengewuerz-german-gingerbread-spice-blend/)
 
         """,
-        notes: "cook on medium heat",
+        notes: """
+        ## Notes
+        
+        For a milder flavor, omit the ginger and black pepper. To add more 'kick,' increase the quantities of these spices according to your taste.
+        """,
         category: "Desserts",
         favorite: false
     ),
@@ -127,6 +131,8 @@ let sampleRecipes = [
     expertiseRequired: "Intermediate",
     caloriesPerServing: "500",
     ingredients: """
+    ## Ingredients
+
     - 5 large eggs
     - 275 g packed brown sugar
     - 85 ml honey
@@ -172,14 +178,14 @@ let sampleRecipes = [
     ## Yield
 
     - Makes about 35 Lebkuchen.
-
+    """,
+    notes: """
     ## Notes
 
     - The batter should be thick enough to scoop, but not runny.
     - Adjust the amount of almond or hazelnut meal if necessary to achieve the right consistency.
     - The flavor of the Lebkuchen develops and improves over time, so these are great for making ahead.
     """,
-    notes: "cook on high heat",
     category: "Desserts",
     favorite: false
 )

@@ -70,6 +70,20 @@ struct ContentView: View {
             }
         }
         .onAppear {
+            // just for quick testing
+            //            if !recipes.isEmpty {
+            //                for index in recipes.indices {
+            //                    modelContext.delete(recipes[index])
+            //                }
+            //                initializeRecipes()
+            //            }
+            //
+            //            if !categories.isEmpty {
+            //                for index in categories.indices {
+            //                    modelContext.delete(categories[index])
+            //                }
+            //                initializeCategories()
+            //            }
             let defaults = UserDefaults.standard
             if !defaults.bool(forKey: "dataLoaded") {
                 if recipes.isEmpty {

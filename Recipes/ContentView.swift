@@ -134,42 +134,50 @@ struct ContentView: View {
     
     private func browseFavoritesList(recipes: [Recipe]) -> some View {
         List {
-            ForEach(recipes) { recipe in
-                NavigationLink {
-                    RecipeDetailView(recipe: recipe)
-                } label: {
-                    Text(recipe.title)
+            if recipes.count == 0 {
+                Text("No favorites recipes yet. Find a recipe and favorite it before choosing this menu.")
+            } else {
+                ForEach(recipes) { recipe in
+                    NavigationLink {
+                        RecipeDetailView(recipe: recipe)
+                    } label: {
+                        Text(recipe.title)
+                    }
                 }
+                .onDelete(perform: deleteItems)
             }
-            .onDelete(perform: deleteItems)
         }
     }
     
     private var categoriesList: some View {
         List {
-            ForEach(categories) { category in
-                NavigationLink {
-                    ScrollView {
-                        VStack {
-                            Markdown {
-                                category.name
-                            }
-                            .padding()
-                        }
-                    }
-                    .toolbar {
-                        ToolbarItem(placement: .navigationBarTrailing) {
-                            NavigationLink(destination: EditCategoryView(category: category)) {
-                                Image(systemName: "pencil").imageScale(.large)
+            if categories.count == 0 {
+                Text("No categories yet. Tap the + button to add a category.")
+            } else {
+                ForEach(categories) { category in
+                    NavigationLink {
+                        ScrollView {
+                            VStack {
+                                Markdown {
+                                    category.name
+                                }
+                                .padding()
                             }
                         }
+                        .toolbar {
+                            ToolbarItem(placement: .navigationBarTrailing) {
+                                NavigationLink(destination: EditCategoryView(category: category)) {
+                                    Image(systemName: "pencil").imageScale(.large)
+                                }
+                            }
+                        }
                     }
+                label: {
+                    Text(category.name)
                 }
-            label: {
-                Text(category.name)
+                }
+                .onDelete(perform: deleteCategory)
             }
-            }
-            .onDelete(perform: deleteCategory)
         }
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {

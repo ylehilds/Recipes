@@ -135,7 +135,7 @@ struct ContentView: View {
     private func browseFavoritesList(recipes: [Recipe]) -> some View {
         List {
             if recipes.count == 0 {
-                Text("No favorites recipes yet. Find a recipe and favorite it before choosing this menu.")
+                Text("No favorites recipes yet. Favorite a recipe before choosing this menu.")
             } else {
                 ForEach(recipes) { recipe in
                     NavigationLink {

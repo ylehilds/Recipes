@@ -126,21 +126,6 @@ struct RecipeDetailView: View {
         let linksSyntaxRemoved = tableDividerSyntaxRemoved.replacingOccurrences(of: "(!?\\[.*?\\])", with: "", options: .regularExpression)
         return linksSyntaxRemoved
     }
-    
-//    func stripMarkdown(from input: String) -> String {
-//        // Regular expression definition to match Markdown patterns
-//        let regex = try! NSRegularExpression(pattern: "(!?\\[.*?\\])|([#*]+\\s*)|(\\*\\*(.*?)\\*\\*)|(\\| )|(---)|(\\|)", options: [])
-//
-//        // Replacing Markdown patterns with an empty string
-//        let strippedString = regex.stringByReplacingMatches(
-//            in: input,
-//            options: [],
-//            range: NSRange(location: 0, length: input.utf16.count),
-//            withTemplate: ""
-//        )
-//        
-//        return strippedString
-//    }
 }
 
 #Preview {

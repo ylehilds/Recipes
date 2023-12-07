@@ -8,6 +8,7 @@
 import SwiftUI
 import SwiftData
 import MarkdownUI
+import Ink
 
 struct RecipeDetailView: View {
     let recipe: Recipe?
@@ -15,18 +16,18 @@ struct RecipeDetailView: View {
     var shareContent: String {
         guard let recipe = recipe else { return "" }
         return """
-                        ## \(recipe.title)
-                        **Author:** \(recipe.author)
-                        **Date:** \(recipe.date)
-                        **Time Required:** \(recipe.timeRequired)
-                        **Servings:** \(recipe.servings)
-                        **Expertise Required**: \(recipe.expertiseRequired)
-                        **Calories Per Serving**: \(recipe.caloriesPerServing)
-                        \(recipe.ingredients)
-                        \(recipe.instructions)
-                        \(recipe.notes)
-                        **Category**: \(recipe.category)
-                        """
+                    ## \(recipe.title)
+                    **Author:** \(recipe.author)
+                    **Date:** \(recipe.date)
+                    **Time Required:** \(recipe.timeRequired)
+                    **Servings:** \(recipe.servings)
+                    **Expertise Required**: \(recipe.expertiseRequired)
+                    **Calories Per Serving**: \(recipe.caloriesPerServing)
+                    \(recipe.ingredients)
+                    \(recipe.instructions)
+                    \(recipe.notes)
+                    **Category**: \(recipe.category)
+                """
     }
     
     var body: some View {
@@ -85,8 +86,7 @@ struct RecipeDetailView: View {
                 
                 ToolbarItem(placement: .navigationBarTrailing) {
                     ZStack {
-                        ShareLink(item: shareContent)
-                    }
+                        ShareLink(item: removeMarkdownSyntax(from: shareContent))                    }
                 }
                 
                 ToolbarItem(placement: .navigationBarTrailing) {
@@ -105,8 +105,9 @@ struct RecipeDetailView: View {
         }
     }
     
-    func printRecipe(){
-        let htmlString = shareContent
+    func printRecipe() {
+        let parser = MarkdownParser()
+        let htmlString = parser.html(from: shareContent)
         let formatter: UIMarkupTextPrintFormatter = UIMarkupTextPrintFormatter(markupText: htmlString)
         let printInfo = UIPrintInfo(dictionary: nil)
         printInfo.jobName = "Printing Recipe"
@@ -115,6 +116,17 @@ struct RecipeDetailView: View {
         printController.printInfo = printInfo
         printController.printFormatter = formatter
         printController.present(animated: true, completionHandler: nil)
+    }
+    
+    func removeMarkdownSyntax(from text: String) -> String {
+        let boldSyntaxRemoved = text.replacingOccurrences(of: "\\*\\*(.*?)\\*\\*", with: "$1", options: .regularExpression)
+        let headerSyntaxRemoved = boldSyntaxRemoved.replacingOccurrences(of: "\\#\\# (.*?)", with: "$1", options: .regularExpression)
+        let tableSyntaxRemoved = headerSyntaxRemoved.replacingOccurrences(of: "\\| ", with: "", options: .regularExpression)
+        let tableDividerSyntaxRemoved = tableSyntaxRemoved.replacingOccurrences(of: "---", with: "", options: .regularExpression)
+        let tableSyntaxRemainingRemoved = tableDividerSyntaxRemoved.replacingOccurrences(of: "\\|", with: "", options: .regularExpression)
+
+        
+        return tableSyntaxRemainingRemoved
     }
 }
 

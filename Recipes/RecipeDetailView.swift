@@ -86,7 +86,7 @@ struct RecipeDetailView: View {
                 
                 ToolbarItem(placement: .navigationBarTrailing) {
                     ZStack {
-                        ShareLink(item: removeMarkdownSyntax(from: shareContent))                    }
+                        ShareLink(item: removeMarkdownSyntax(from: shareContent))}
                 }
                 
                 ToolbarItem(placement: .navigationBarTrailing) {
@@ -121,11 +121,26 @@ struct RecipeDetailView: View {
     func removeMarkdownSyntax(from text: String) -> String {
         let boldSyntaxRemoved = text.replacingOccurrences(of: "\\*\\*(.*?)\\*\\*", with: "$1", options: .regularExpression)
         let headerSyntaxRemoved = boldSyntaxRemoved.replacingOccurrences(of: "\\#\\# (.*?)", with: "$1", options: .regularExpression)
-        let tableSyntaxRemoved = headerSyntaxRemoved.replacingOccurrences(of: "\\| ", with: "", options: .regularExpression)
-        let tableDividerSyntaxRemoved = tableSyntaxRemoved.replacingOccurrences(of: "---", with: "", options: .regularExpression)
-        let tableSyntaxRemainingRemoved = tableDividerSyntaxRemoved.replacingOccurrences(of: "\\|", with: "", options: .regularExpression)
-        return tableSyntaxRemainingRemoved
+        let tableColumnSyntaxRemoved = headerSyntaxRemoved.replacingOccurrences(of: "\\|", with: "", options: .regularExpression)
+        let tableDividerSyntaxRemoved = tableColumnSyntaxRemoved.replacingOccurrences(of: "---", with: "", options: .regularExpression)
+        let linksSyntaxRemoved = tableDividerSyntaxRemoved.replacingOccurrences(of: "(!?\\[.*?\\])", with: "", options: .regularExpression)
+        return linksSyntaxRemoved
     }
+    
+//    func stripMarkdown(from input: String) -> String {
+//        // Regular expression definition to match Markdown patterns
+//        let regex = try! NSRegularExpression(pattern: "(!?\\[.*?\\])|([#*]+\\s*)|(\\*\\*(.*?)\\*\\*)|(\\| )|(---)|(\\|)", options: [])
+//
+//        // Replacing Markdown patterns with an empty string
+//        let strippedString = regex.stringByReplacingMatches(
+//            in: input,
+//            options: [],
+//            range: NSRange(location: 0, length: input.utf16.count),
+//            withTemplate: ""
+//        )
+//        
+//        return strippedString
+//    }
 }
 
 #Preview {

@@ -13,8 +13,8 @@ struct RecipeDetailView: View {
     let recipe: Recipe?
     
     var shareContent: String {
-                        guard let recipe = recipe else { return "" }
-                        return """
+        guard let recipe = recipe else { return "" }
+        return """
                         ## \(recipe.title)
                         **Author:** \(recipe.author)
                         **Date:** \(recipe.date)
@@ -27,7 +27,7 @@ struct RecipeDetailView: View {
                         \(recipe.notes)
                         **Category**: \(recipe.category)
                         """
-                    }
+    }
     
     var body: some View {
         //        NavigationStack {
@@ -61,11 +61,13 @@ struct RecipeDetailView: View {
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Image(systemName: recipe.favorite ? "heart.fill" : "heart").imageScale(.large)
-                        .foregroundColor(recipe.favorite ? .red : .gray)
-                        .onTapGesture {
-                            recipe.favorite.toggle()
-                        }
+                    ZStack {
+                        Image(systemName: recipe.favorite ? "heart.fill" : "heart").imageScale(.large)
+                            .foregroundColor(recipe.favorite ? .red : .gray)
+                            .onTapGesture {
+                                recipe.favorite.toggle()
+                            }
+                    }
                 }
                 
                 ToolbarItem(placement: .navigationBarTrailing) {
@@ -80,8 +82,21 @@ struct RecipeDetailView: View {
                         }
                     }
                 }
+                
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    ShareLink(item: shareContent)
+                    ZStack {
+                        ShareLink(item: shareContent)
+                    }
+                }
+                
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    ZStack {
+                        Button(action: {
+                            printRecipe()
+                        }) {
+                            Image(systemName: "printer")
+                        }
+                    }
                 }
             }
         }
@@ -89,8 +104,18 @@ struct RecipeDetailView: View {
             Text("Select a Recipe!")
         }
     }
-    //        }
-    //    }
+    
+    func printRecipe(){
+        let htmlString = shareContent
+        let formatter: UIMarkupTextPrintFormatter = UIMarkupTextPrintFormatter(markupText: htmlString)
+        let printInfo = UIPrintInfo(dictionary: nil)
+        printInfo.jobName = "Printing Recipe"
+        printInfo.outputType = .general
+        let printController = UIPrintInteractionController.shared
+        printController.printInfo = printInfo
+        printController.printFormatter = formatter
+        printController.present(animated: true, completionHandler: nil)
+    }
 }
 
 #Preview {

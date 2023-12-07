@@ -124,8 +124,6 @@ struct RecipeDetailView: View {
         let tableSyntaxRemoved = headerSyntaxRemoved.replacingOccurrences(of: "\\| ", with: "", options: .regularExpression)
         let tableDividerSyntaxRemoved = tableSyntaxRemoved.replacingOccurrences(of: "---", with: "", options: .regularExpression)
         let tableSyntaxRemainingRemoved = tableDividerSyntaxRemoved.replacingOccurrences(of: "\\|", with: "", options: .regularExpression)
-
-        
         return tableSyntaxRemainingRemoved
     }
 }

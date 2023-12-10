@@ -24,7 +24,6 @@ struct EditRecipeView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                //                NavigationView {
                 if let recipe {
                     Form {
                         Section(header: Text("Title")) {
@@ -122,7 +121,6 @@ struct EditRecipeView: View {
                 }
             }
         }
-        //        }
         .navigationBarBackButtonHidden(true)
     }
 }

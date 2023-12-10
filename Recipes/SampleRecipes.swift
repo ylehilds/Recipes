@@ -40,27 +40,6 @@ func loadJson(filename fileName: String) -> [SampleRecipe]? {
     return nil
 }
 
-//let sampleRecipes = [
-//    Item (
-//        title: "Velvet Cake",
-//        ingredients: """
-//            |  Quantity  |  Ingredient
-//            """,
-//        instructions: """
-//            Mix all ingredients together
-//            """
-//        ),
-//    Item (
-//        title: "Chocolate Cake",
-//        ingredients: """
-//            |  Quantity  |  Ingredient
-//            """,
-//        instructions: """
-//            Mix all ingredients together
-//            """
-//        ),
-//]
-
 let sampleRecipes = [
     Recipe(
         title: "Pfeffernüsse",

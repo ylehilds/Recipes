@@ -70,20 +70,6 @@ struct ContentView: View {
             }
         }
         .onAppear {
-            // just for quick testing
-            //            if !recipes.isEmpty {
-            //                for index in recipes.indices {
-            //                    modelContext.delete(recipes[index])
-            //                }
-            //                initializeRecipes()
-            //            }
-            //
-            //            if !categories.isEmpty {
-            //                for index in categories.indices {
-            //                    modelContext.delete(categories[index])
-            //                }
-            //                initializeCategories()
-            //            }
             let defaults = UserDefaults.standard
             if !defaults.bool(forKey: "dataLoaded") {
                 if recipes.isEmpty {
@@ -93,7 +79,6 @@ struct ContentView: View {
                 if categories.isEmpty {
                     initializeCategories()
                 }
-                
                 defaults.set(true, forKey: "dataLoaded")
             }
         }
@@ -114,11 +99,6 @@ struct ContentView: View {
             ToolbarItem(placement: .navigationBarTrailing) {
                 EditButton()
             }
-            //            ToolbarItem {
-            //                Button(action: initializeRecipes) {
-            //                    Label("Initialize", systemImage: "folder.badge.plus")
-            //                }
-            //            }
             ToolbarItem {
                 Button(action: {
                     showingCreateRecipeSheet.toggle()
@@ -183,11 +163,6 @@ struct ContentView: View {
             ToolbarItem(placement: .navigationBarTrailing) {
                 EditButton()
             }
-            //            ToolbarItem {
-            //                Button(action: initializeCategories) {
-            //                    Label("Initialize", systemImage: "folder.badge.plus")
-            //                }
-            //            }
             ToolbarItem {
                 Button(action: {
                     showingCreateCategorySheet.toggle()
@@ -246,15 +221,6 @@ struct ContentView: View {
             for recipe in sampleRecipes {
                 modelContext.insert(recipe)
             }
-            //            if let recipes = loadJson(filename: "SampleData") {
-            //                for recipe in recipes {
-            //                    modelContext.insert(Item(
-            //                        title: recipe.title,
-            //                        ingredients: recipe.ingredients,
-            //                        instructions: recipe.instructions
-            //                    ))
-            //                }
-            //            }
         }
     }
     
@@ -263,13 +229,6 @@ struct ContentView: View {
             for category in sampleCategories {
                 modelContext.insert(category)
             }
-            //            if let categories = loadJson(filename: "SampleCategoryData") {
-            //                for category in categories {
-            //                    modelContext.insert(Category(
-            //                        name: category.name
-            //                    ))
-            //                }
-            //            }
         }
     }
 }

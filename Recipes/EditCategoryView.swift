@@ -29,7 +29,6 @@ struct EditCategoryView: View {
                                 category.name = newValue
                                 showAlert = !formIsValid(category)
                             }), axis: .vertical)
-                            // TextEditor(text: Binding(get: { category.name }, set: { category.name = $0 }))
                         }
                     }
                     .toolbar {

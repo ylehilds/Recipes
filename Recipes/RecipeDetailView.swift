@@ -31,8 +31,6 @@ struct RecipeDetailView: View {
     }
     
     var body: some View {
-        //        NavigationStack {
-        //            ZStack {
         if let recipe = recipe {
             ScrollView {
                 VStack {

@@ -103,6 +103,7 @@ struct RecipeDetailView: View {
         }
     }
     
+    // https://developer.apple.com/forums/thread/739856
     func printRecipe() {
         let parser = MarkdownParser()
         let htmlString = parser.html(from: shareContent)
@@ -116,6 +117,7 @@ struct RecipeDetailView: View {
         printController.present(animated: true, completionHandler: nil)
     }
     
+    // https://www.hackingwithswift.com/example-code/strings/replacing-text-in-a-string-using-replacingoccurrencesof
     func removeMarkdownSyntax(from text: String) -> String {
         let boldSyntaxRemoved = text.replacingOccurrences(of: "\\*\\*(.*?)\\*\\*", with: "$1", options: .regularExpression)
         let headerSyntaxRemoved = boldSyntaxRemoved.replacingOccurrences(of: "\\#\\# (.*?)", with: "$1", options: .regularExpression)

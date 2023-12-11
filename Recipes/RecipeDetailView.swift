@@ -117,7 +117,7 @@ struct RecipeDetailView: View {
         printController.present(animated: true, completionHandler: nil)
     }
     
-    // https://www.hackingwithswift.com/example-code/strings/replacing-text-in-a-string-using-replacingoccurrencesof
+    // https://programmingwithswift.com/how-to-replace-characters-in-string-with-swift/
     func removeMarkdownSyntax(from text: String) -> String {
         let boldSyntaxRemoved = text.replacingOccurrences(of: "\\*\\*(.*?)\\*\\*", with: "$1", options: .regularExpression)
         let headerSyntaxRemoved = boldSyntaxRemoved.replacingOccurrences(of: "\\#\\# (.*?)", with: "$1", options: .regularExpression)

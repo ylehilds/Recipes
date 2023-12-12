@@ -40,8 +40,7 @@ struct EditCategoryView: View {
                                     showAlert = true
                                 }
                             }) {
-                                Image(systemName: "arrow.backward")
-                                Text("Back")
+                                Image(systemName: "chevron.backward")
                             }
                             .disabled(!formIsValid(category))
                             .alert(isPresented: $showAlert) {

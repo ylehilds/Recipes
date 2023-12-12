@@ -103,8 +103,7 @@ struct EditRecipeView: View {
                                     showAlert = true
                                 }
                             }) {
-                                Image(systemName: "arrow.backward")
-                                Text("Back")
+                                Image(systemName: "chevron.backward")
                             }
                             .disabled(!formIsValid(recipe))
                             .alert(isPresented: $showAlert) {

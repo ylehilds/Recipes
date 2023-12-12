@@ -41,6 +41,7 @@ struct EditCategoryView: View {
                                 }
                             }) {
                                 Image(systemName: "chevron.backward")
+                                Text("Back")
                             }
                             .disabled(!formIsValid(category))
                             .alert(isPresented: $showAlert) {

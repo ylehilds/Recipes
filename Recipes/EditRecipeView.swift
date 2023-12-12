@@ -104,6 +104,7 @@ struct EditRecipeView: View {
                                 }
                             }) {
                                 Image(systemName: "chevron.backward")
+                                Text("Back")
                             }
                             .disabled(!formIsValid(recipe))
                             .alert(isPresented: $showAlert) {

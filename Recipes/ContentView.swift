@@ -233,6 +233,22 @@ struct ContentView: View {
     }
 }
 
-#Preview {
-    ContentView()
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        let sharedModelContainer: ModelContainer = {
+            let schema = Schema([
+                Recipe.self,
+                Category.self
+            ])
+            let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: true)
+            
+            do {
+                return try ModelContainer(for: schema, configurations: [modelConfiguration])
+            } catch {
+                fatalError("Could not create ModelContainer: \(error)")
+            }
+        }()
+        ContentView()
+            .modelContainer(sharedModelContainer)
+    }
 }

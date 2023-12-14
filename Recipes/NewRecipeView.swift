@@ -10,7 +10,7 @@ import SwiftData
 
 struct NewRecipeView: View {
     @Environment(\.modelContext) private var modelContext
-    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.dismiss) private var dismiss
     @Query private var categories: [Category]
     @State private var showAlert = false
     
@@ -30,7 +30,7 @@ struct NewRecipeView: View {
         VStack {
             HStack {
                 Button("Cancel") {
-                    presentationMode.wrappedValue.dismiss()
+                    dismiss()
                 }
                 Spacer()
                 
@@ -42,7 +42,7 @@ struct NewRecipeView: View {
                         showAlert = true
                     } else {
                         addItem()
-                        presentationMode.wrappedValue.dismiss()
+                        dismiss()
                     }
                 }
                 .alert(isPresented: $showAlert) {

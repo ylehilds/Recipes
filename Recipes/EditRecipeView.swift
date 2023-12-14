@@ -12,7 +12,7 @@ struct EditRecipeView: View {
     var recipe: Recipe?
     
     @Environment(\.modelContext) private var modelContext
-    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.dismiss) private var dismiss
     @State private var showAlert = false
     
     @Query private var categories: [Category]
@@ -29,55 +29,74 @@ struct EditRecipeView: View {
                         Section(header: Text("Title")) {
                             TextField("Title", text: Binding(get: { recipe.title }, set: { newValue in
                                 recipe.title = newValue
-                                showAlert = !formIsValid(recipe)
+                                if recipe.title.isEmpty {
+                                    showAlert = true
+                                }
                             }), axis: .vertical)
                         }
                         Section(header: Text("Author")) {
                             TextField("Author", text: Binding(get: { recipe.author }, set: { newValue in
                                 recipe.author = newValue
-                                showAlert = !formIsValid(recipe)
+                                if recipe.author.isEmpty {
+                                    showAlert = true
+                                }
                             }), axis: .vertical)
                         }
                         Section(header: Text("Date")) {
                             TextField("Date", text: Binding(get: { recipe.date }, set: { newValue in
                                 recipe.date = newValue
-                                showAlert = !formIsValid(recipe)
+                                if recipe.date.isEmpty {
+                                   showAlert = true
+                               }
+//                                showAlert = !formIsValid(recipe)
                             }), axis: .vertical)
                         }
                         Section(header: Text("Time Required")) {
                             TextField("Time Required", text: Binding(get: { recipe.timeRequired }, set: { newValue in
                                 recipe.timeRequired = newValue
-                                showAlert = !formIsValid(recipe)
+                                if recipe.timeRequired.isEmpty {
+                                   showAlert = true
+                               }
                             }), axis: .vertical)
                         }
                         Section(header: Text("Servings")) {
                             TextField("Servings", text: Binding(get: { recipe.servings }, set: { newValue in
                                 recipe.servings = newValue
-                                showAlert = !formIsValid(recipe)
+                                if recipe.servings.isEmpty {
+                                   showAlert = true
+                               }
                             }), axis: .vertical)
                         }
                         Section(header: Text("Expertise Required")) {
                             TextField("Expertise Required", text: Binding(get: { recipe.expertiseRequired }, set: { newValue in
                                 recipe.expertiseRequired = newValue
-                                showAlert = !formIsValid(recipe)
+                                if recipe.expertiseRequired.isEmpty {
+                                   showAlert = true
+                               }
                             }), axis: .vertical)
                         }
                         Section(header: Text("Calories Per Serving")) {
                             TextField("Calories Per Serving", text: Binding(get: { recipe.caloriesPerServing }, set: { newValue in
                                 recipe.caloriesPerServing = newValue
-                                showAlert = !formIsValid(recipe)
+                                if recipe.caloriesPerServing.isEmpty {
+                                   showAlert = true
+                               }
                             }), axis: .vertical)
                         }
                         Section(header: Text("Ingredients")) {
                             TextField("Ingredients", text: Binding(get: { recipe.ingredients }, set: { newValue in
                                 recipe.ingredients = newValue
-                                showAlert = !formIsValid(recipe)
+                                if recipe.ingredients.isEmpty {
+                                   showAlert = true
+                               }
                             }), axis: .vertical)
                         }
                         Section(header: Text("Instructions")) {
                             TextField("Instructions", text: Binding(get: { recipe.instructions }, set: { newValue in
                                 recipe.instructions = newValue
-                                showAlert = !formIsValid(recipe)
+                                if recipe.instructions.isEmpty {
+                                   showAlert = true
+                               }
                             }), axis: .vertical)
                         }
                         Section(header: Text("notes")) {
@@ -86,7 +105,9 @@ struct EditRecipeView: View {
                         Section(header: Text("Category")) {
                             Picker("Category", selection: Binding(get: { recipe.category }, set: { newValue in
                                 recipe.category = newValue
-                                showAlert = !formIsValid(recipe)
+                                if recipe.category.isEmpty {
+                                   showAlert = true
+                               }
                             })) {
                                 ForEach(categories) { category in
                                     Text(category.name).tag(category.name)
@@ -98,7 +119,7 @@ struct EditRecipeView: View {
                         ToolbarItem(placement: .navigationBarLeading) {
                             Button(action: {
                                 if formIsValid(recipe) {
-                                    presentationMode.wrappedValue.dismiss()
+                                    dismiss()
                                 } else {
                                     showAlert = true
                                 }

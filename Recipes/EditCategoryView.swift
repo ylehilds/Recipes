@@ -12,7 +12,7 @@ struct EditCategoryView: View {
     var category: Category?
     
     @Environment(\.modelContext) private var modelContext
-    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.dismiss) private var dismiss
     @State private var showAlert = false
     
     func formIsValid(_ category: Category) -> Bool {
@@ -27,7 +27,9 @@ struct EditCategoryView: View {
                         Section(header: Text("Category")) {
                             TextField("Category", text: Binding(get: { category.name }, set: { newValue in
                                 category.name = newValue
-                                showAlert = !formIsValid(category)
+                                if category.name.isEmpty {
+                                    showAlert = true
+                                }
                             }), axis: .vertical)
                         }
                     }
@@ -35,7 +37,7 @@ struct EditCategoryView: View {
                         ToolbarItem(placement: .navigationBarLeading) {
                             Button(action: {
                                 if formIsValid(category) {
-                                    presentationMode.wrappedValue.dismiss()
+                                    dismiss()
                                 } else {
                                     showAlert = true
                                 }

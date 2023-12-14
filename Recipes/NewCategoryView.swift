@@ -39,7 +39,7 @@ struct NewCategoryView: View {
             }
             .padding()
             Form {
-                TextField("Name", text: $name)
+                TextField("Name", text: $name, axis: .vertical)
             }
         }
     }

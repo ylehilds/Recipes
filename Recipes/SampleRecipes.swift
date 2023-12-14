@@ -50,8 +50,6 @@ let sampleRecipes = [
         expertiseRequired: "Beginner",
         caloriesPerServing: "200",
         ingredients:"""
-            ## Ingredients
-            
             | Quantity       | Ingredient                                                    |
             | --- | --- |
             | 320g           | Bread flour                                                   |
@@ -74,9 +72,7 @@ let sampleRecipes = [
             | 300g           | Powdered sugar                                                |
             | 4 Tbsp.        | Hot water or juice and zest of 1-2 lemons (I prefer lemon juice over hot water) |
             """,
-        instructions:"""
-        ## Instructions
-
+        instructions: """
         1. **Mix Dry Ingredients:** In a small bowl, mix the dry ingredients together.
         2. **Combine Wet Ingredients:** In a saucepan, combine all wet ingredients except the egg. Heat the mixture, stirring frequently, until everything is melted and the sugar has dissolved. Remove from heat and let it sit for 5 minutes to cool slightly.
         3. **Combine Wet and Dry Mixtures:** Add the dry ingredients to the wet mixture in the saucepan, and then incorporate the egg. Mix until well combined.
@@ -94,8 +90,6 @@ let sampleRecipes = [
 
         """,
         notes: """
-        ## Notes
-        
         For a milder flavor, omit the ginger and black pepper. To add more 'kick,' increase the quantities of these spices according to your taste.
         """,
         category: "Desserts",
@@ -110,8 +104,6 @@ let sampleRecipes = [
     expertiseRequired: "Intermediate",
     caloriesPerServing: "500",
     ingredients: """
-    ## Ingredients
-
     - 5 large eggs
     - 275 g packed brown sugar
     - 85 ml honey
@@ -138,13 +130,8 @@ let sampleRecipes = [
     - 3 tablespoons water
 
     **Directions:** Place sugar and water in a small bowl and stir until smooth.
-
     """,
-    instructions:
-    """
-
-    ## Instructions
-
+    instructions: """
     1. **Preparation:** Preheat the oven to 300 degrees F (150 degrees C).
     2. **Candied Peel:** Toss the candied lemon and orange peel with about 1 cup all-purpose flour to keep it from sticking together. Then, pulse in a food processor until finely minced. Set aside.
     3. **Egg Mixture:** In a large mixing bowl, beat the eggs until foamy. Add the sugar, honey, and vanilla extract, beating until combined.
@@ -159,8 +146,6 @@ let sampleRecipes = [
     - Makes about 35 Lebkuchen.
     """,
     notes: """
-    ## Notes
-
     - The batter should be thick enough to scoop, but not runny.
     - Adjust the amount of almond or hazelnut meal if necessary to achieve the right consistency.
     - The flavor of the Lebkuchen develops and improves over time, so these are great for making ahead.

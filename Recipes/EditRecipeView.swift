@@ -48,7 +48,6 @@ struct EditRecipeView: View {
                                 if recipe.date.isEmpty {
                                    showAlert = true
                                }
-//                                showAlert = !formIsValid(recipe)
                             }), axis: .vertical)
                         }
                         Section(header: Text("Time Required")) {

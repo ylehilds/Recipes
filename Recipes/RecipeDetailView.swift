@@ -17,15 +17,31 @@ struct RecipeDetailView: View {
         guard let recipe = recipe else { return "" }
         return """
                     ## \(recipe.title)
+                
                     **Author:** \(recipe.author)
+                
                     **Date:** \(recipe.date)
+                
                     **Time Required:** \(recipe.timeRequired)
+                
                     **Servings:** \(recipe.servings)
+                
                     **Expertise Required**: \(recipe.expertiseRequired)
+                
                     **Calories Per Serving**: \(recipe.caloriesPerServing)
+                
+                    ## Ingredients
+                
                     \(recipe.ingredients)
+                
+                    ## Instructions
+                
                     \(recipe.instructions)
+                
+                    ## Notes
+                
                     \(recipe.notes)
+                
                     **Category**: \(recipe.category)
                 """
     }
@@ -48,11 +64,11 @@ struct RecipeDetailView: View {
                         .padding()
                     Markdown ("**Calories Per Serving**: \(recipe.caloriesPerServing)")
                         .padding()
-                    Markdown ("\(recipe.ingredients)")
+                    Markdown ("## Ingredients \n \(recipe.ingredients)")
                         .padding()
-                    Markdown ("\(recipe.instructions)")
+                    Markdown ("## Instructions \n \(recipe.instructions)")
                         .padding()
-                    Markdown ("\(recipe.notes)")
+                    Markdown ("## Notes \n \(recipe.notes)")
                         .padding()
                     Markdown ("**Category**: \(recipe.category)")
                         .padding()

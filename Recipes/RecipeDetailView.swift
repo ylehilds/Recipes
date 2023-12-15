@@ -145,8 +145,6 @@ struct RecipeDetailView: View {
 }
 
 #Preview {
-    let category1 = Category(name: "Category1")
-    let category2 = Category(name: "Category2")
-    let recipe = Recipe(title: "Title", author: "Author", date: "Date", timeRequired: "Time", servings: "Servings", expertiseRequired: "Expertise", caloriesPerServing: "Calories", ingredients: "Ingredients", instructions: "Instructions", notes: "Notes", category: [category1, category2], favorite: true)
+    let recipe = Recipe(title: "Title", author: "Author", date: "Date", timeRequired: "Time", servings: "Servings", expertiseRequired: "Expertise", caloriesPerServing: "Calories", ingredients: "Ingredients", instructions: "Instructions", notes: "Notes", category: [], favorite: true)
     return RecipeDetailView(recipe: recipe)
 }

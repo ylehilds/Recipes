@@ -11,8 +11,9 @@ import SwiftData
 struct NewRecipeView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
-    @Query private var categories: [Category]
     @State private var showAlert = false
+    @Query private var categories: [Category]
+    @State private var selectedCategories: [Category] = []
     
     @State private var title = ""
     @State private var author = ""
@@ -24,7 +25,7 @@ struct NewRecipeView: View {
     @State private var ingredients = ""
     @State private var instructions = ""
     @State private var notes = ""
-    @State private var category = ""
+//    @State private var category:[Category] = []
     
     var body: some View {
         VStack {
@@ -38,11 +39,16 @@ struct NewRecipeView: View {
                 Spacer()
                 
                 Button("Save") {
-                    if category.isEmpty || title.isEmpty || author.isEmpty || date.isEmpty || timeRequired.isEmpty || servings.isEmpty || expertiseRequired.isEmpty || caloriesPerServing.isEmpty || ingredients.isEmpty || instructions.isEmpty {
+                    if selectedCategories.isEmpty || title.isEmpty || author.isEmpty || date.isEmpty || timeRequired.isEmpty || servings.isEmpty || expertiseRequired.isEmpty || caloriesPerServing.isEmpty || ingredients.isEmpty || instructions.isEmpty {
                         showAlert = true
                     } else {
-                        addItem()
-                        dismiss()
+                        do {
+                            addItem()
+                            try modelContext.save()
+                            dismiss()
+                        } catch {
+                            print("An error occurred: \(error)")
+                        }
                     }
                 }
                 .alert(isPresented: $showAlert) {
@@ -61,20 +67,43 @@ struct NewRecipeView: View {
                 TextField("Ingredients", text: $ingredients, axis: .vertical)
                 TextField("Instructions", text: $instructions, axis: .vertical)
                 TextField("Notes", text: $notes, axis: .vertical)
-                Picker("Category", selection: $category) {
-                    Text("").tag("")
-                    ForEach(categories) { category in
-                        Text(category.name).tag(category.name)
+                // When the picker only accepted 1 value
+                //                Picker("Category", selection: $category) {
+                //                    Text("").tag("")
+                //                    ForEach(categories) { category in
+                //                        Text(category.name).tag(category.name)
+                //                    }
+                //                }
+                List {
+                    ForEach(categories, id: \.self) { category in
+                        Toggle(category.name, isOn: Binding(
+                            get: { self.selectedCategories.contains(category) },
+                            set: { (newValue) in
+                                if newValue {
+                                    self.selectedCategories.append(category)
+                                } else {
+                                    self.selectedCategories.removeAll { $0 == category }
+                                }
+                            }
+                        ))
                     }
                 }
+                Text("Selected Categories: \(selectedCategories.map { $0.name }.joined(separator: ", "))")
             }
         }
     }
     
     private func addItem() {
         withAnimation {
-            let recipe = Recipe(title: title, author: author, date: date, timeRequired: timeRequired, servings: servings, expertiseRequired: expertiseRequired, caloriesPerServing: caloriesPerServing, ingredients: ingredients, instructions: instructions, notes: notes, category: category, favorite: false)
-            modelContext.insert(recipe)
+            do {
+                let recipe = Recipe(title: title, author: author, date: date, timeRequired: timeRequired, servings: servings, expertiseRequired: expertiseRequired, caloriesPerServing: caloriesPerServing, ingredients: ingredients, instructions: instructions, notes: notes, categories: selectedCategories, favorite: false)
+                try modelContext.insert(recipe)
+                dismiss()
+            } catch {
+                print("An error occurred: \(error)")
+            }
+            
+            //            modelContext.insert(recipe)
         }
     }
 }

@@ -20,10 +20,10 @@ final class Recipe {
     var ingredients: String
     var instructions: String
     var notes: String
-    var category: String
+    var categories: [Category]
     var favorite: Bool
     
-    init(title: String, author: String, date: String, timeRequired: String, servings: String, expertiseRequired: String, caloriesPerServing: String, ingredients: String, instructions: String, notes: String, category: String, favorite: Bool) {
+    init(title: String, author: String, date: String, timeRequired: String, servings: String, expertiseRequired: String, caloriesPerServing: String, ingredients: String, instructions: String, notes: String, categories: [Category], favorite: Bool) {
         self.title = title
         self.author = author
         self.date = date
@@ -34,7 +34,7 @@ final class Recipe {
         self.ingredients = ingredients
         self.instructions = instructions
         self.notes = notes
-        self.category = category
+        self.categories = categories
         self.favorite = favorite
     }
 }

@@ -16,9 +16,15 @@ struct EditRecipeView: View {
     @State private var showAlert = false
     
     @Query private var categories: [Category]
+    @State private var selectedCategories: [Category] = []
     
+    init(recipe: Recipe?) {
+        self.recipe = recipe
+        _selectedCategories = State(initialValue: recipe?.categories ?? [])
+    }
+
     func formIsValid(_ recipe: Recipe) -> Bool {
-        !recipe.category.isEmpty && !recipe.title.isEmpty && !recipe.author.isEmpty && !recipe.date.isEmpty && !recipe.timeRequired.isEmpty && !recipe.servings.isEmpty && !recipe.expertiseRequired.isEmpty && !recipe.caloriesPerServing.isEmpty && !recipe.ingredients.isEmpty && !recipe.instructions.isEmpty
+        !selectedCategories.isEmpty && !recipe.title.isEmpty && !recipe.author.isEmpty && !recipe.date.isEmpty && !recipe.timeRequired.isEmpty && !recipe.servings.isEmpty && !recipe.expertiseRequired.isEmpty && !recipe.caloriesPerServing.isEmpty && !recipe.ingredients.isEmpty && !recipe.instructions.isEmpty
     }
     
     var body: some View {
@@ -102,23 +108,44 @@ struct EditRecipeView: View {
                             TextField("Notes", text: Binding(get: { recipe.notes }, set: { recipe.notes = $0 }), axis: .vertical)
                         }
                         Section(header: Text("Category")) {
-                            Picker("Category", selection: Binding(get: { recipe.category }, set: { newValue in
-                                recipe.category = newValue
-                                if recipe.category.isEmpty {
-                                   showAlert = true
-                               }
-                            })) {
-                                ForEach(categories) { category in
-                                    Text(category.name).tag(category.name)
+//                            Picker("Category", selection: Binding(get: { recipe.category }, set: { newValue in
+//                                recipe.category = newValue
+//                                if recipe.category.isEmpty {
+//                                   showAlert = true
+//                               }
+//                            })) {
+//                                ForEach(categories) { category in
+//                                    Text(category.name).tag(category.name)
+//                                }
+//                            }
+                            List {
+                                ForEach(categories, id: \.self) { category in
+                                    Toggle(category.name, isOn: Binding(
+                                        get: { self.selectedCategories.contains(category) },
+                                        set: { (newValue) in
+                                            if newValue {
+                                                self.selectedCategories.append(category)
+                                            } else {
+                                                self.selectedCategories.removeAll(where: { $0 == category })
+                                            }
+                                        }
+                                    ))
                                 }
                             }
+//                            Text("Selected Categories: \(selectedCategories.map { $0.name }.joined(separator: ", "))")
                         }
                     }
                     .toolbar {
                         ToolbarItem(placement: .navigationBarLeading) {
                             Button(action: {
                                 if formIsValid(recipe) {
-                                    dismiss()
+                                    recipe.categories = selectedCategories
+                                            do {
+                                                try modelContext.save()
+                                                dismiss()
+                                            } catch {
+                                                print("An error occurred: \(error)")
+                                            }
                                 } else {
                                     showAlert = true
                                 }
@@ -146,6 +173,8 @@ struct EditRecipeView: View {
 }
 
 #Preview {
-    let recipe = Recipe(title: "Feijoada", author: "John Doe", date: "11/29/2023", timeRequired: "3 hours", servings: "20", expertiseRequired: "Beginner", caloriesPerServing: "300", ingredients: "beans, pork, onions, etc...", instructions: "Cook for 2.5 hrs", notes: "cook on medium heat", category: "Comfort", favorite: true)
+    let category1 = Category(name: "Comfort")
+    let category2 = Category(name: "Brazilian")
+    let recipe = Recipe(title: "Feijoada", author: "John Doe", date: "11/29/2023", timeRequired: "3 hours", servings: "20", expertiseRequired: "Beginner", caloriesPerServing: "300", ingredients: "beans, pork, onions, etc...", instructions: "Cook for 2.5 hrs", notes: "cook on medium heat", categories: [category1, category2], favorite: true)
     return EditRecipeView(recipe: recipe)
 }

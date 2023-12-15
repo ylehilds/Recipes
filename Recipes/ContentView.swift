@@ -41,7 +41,7 @@ struct ContentView: View {
                 
                 Section(header: Text("Recipes by Categories")) {
                     ForEach(categories) { category in
-                        NavigationLink(destination: browseAllList(recipes: recipes.filter { $0.category == category.name })) {
+                        NavigationLink(destination: browseAllList(recipes: recipes.filter { $0.categories.contains(where: { $0.name == category.name }) })) {
                             ScrollView {
                                 VStack {
                                     Markdown {

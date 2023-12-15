@@ -92,7 +92,7 @@ let sampleRecipes = [
         notes: """
         For a milder flavor, omit the ginger and black pepper. To add more 'kick,' increase the quantities of these spices according to your taste.
         """,
-        category: "Desserts",
+        categories: [Category(name: "Desserts"), Category(name: "German")],
         favorite: false
     ),
     Recipe(
@@ -150,7 +150,7 @@ let sampleRecipes = [
     - Adjust the amount of almond or hazelnut meal if necessary to achieve the right consistency.
     - The flavor of the Lebkuchen develops and improves over time, so these are great for making ahead.
     """,
-    category: "Desserts",
+    categories: [Category(name: "Desserts"), Category(name: "German")],
     favorite: false
 )
 ]

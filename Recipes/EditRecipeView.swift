@@ -175,8 +175,6 @@ struct EditRecipeView: View {
 }
 
 #Preview {
-    let category1 = Category(name: "Comfort")
-    let category2 = Category(name: "Brazilian")
-    let recipe = Recipe(title: "Feijoada", author: "John Doe", date: "11/29/2023", timeRequired: "3 hours", servings: "20", expertiseRequired: "Beginner", caloriesPerServing: "300", ingredients: "beans, pork, onions, etc...", instructions: "Cook for 2.5 hrs", notes: "cook on medium heat", category: [category1, category2], favorite: true)
+    let recipe = Recipe(title: "Feijoada", author: "John Doe", date: "11/29/2023", timeRequired: "3 hours", servings: "20", expertiseRequired: "Beginner", caloriesPerServing: "300", ingredients: "beans, pork, onions, etc...", instructions: "Cook for 2.5 hrs", notes: "cook on medium heat", category: [], favorite: true)
     return EditRecipeView(recipe: recipe)
 }

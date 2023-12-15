@@ -42,7 +42,7 @@ struct RecipeDetailView: View {
                 
                     \(recipe.notes)
                 
-                    **Category**: \(recipe.categories.map { $0.name }.joined(separator: ", "))
+                    **Category**: \(recipe.category?.map { $0.name }.joined(separator: ", ") ?? "")
                 """
     }
     
@@ -70,7 +70,7 @@ struct RecipeDetailView: View {
                         .padding()
                     Markdown ("## Notes \n \(recipe.notes)")
                         .padding()
-                    Markdown ("**Category**: \(recipe.categories.map { $0.name }.joined(separator: ", "))")
+                    Markdown ("**Category**: \(recipe.category?.map { $0.name }.joined(separator: ", ") ?? "")")
                         .padding()
                 }
             }
@@ -147,6 +147,6 @@ struct RecipeDetailView: View {
 #Preview {
     let category1 = Category(name: "Category1")
     let category2 = Category(name: "Category2")
-    let recipe = Recipe(title: "Title", author: "Author", date: "Date", timeRequired: "Time", servings: "Servings", expertiseRequired: "Expertise", caloriesPerServing: "Calories", ingredients: "Ingredients", instructions: "Instructions", notes: "Notes", categories: [category1, category2], favorite: true)
+    let recipe = Recipe(title: "Title", author: "Author", date: "Date", timeRequired: "Time", servings: "Servings", expertiseRequired: "Expertise", caloriesPerServing: "Calories", ingredients: "Ingredients", instructions: "Instructions", notes: "Notes", category: [category1, category2], favorite: true)
     return RecipeDetailView(recipe: recipe)
 }

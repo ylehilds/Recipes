@@ -11,8 +11,15 @@ import SwiftData
 struct NewRecipeView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
+    @Query(sort: [SortDescriptor(\Recipe.title)]) private var recipes: [Recipe]
+    
+    @Query(sort: [SortDescriptor(\Category.name)]) private var categories: [Category]
+    var uniqueCategories: [Category] {
+        var uniqueNames = Set<String>()
+        return categories.filter { uniqueNames.insert($0.name).inserted }
+    }
+    
     @State private var showAlert = false
-    @Query private var categories: [Category]
     @State private var selectedCategories: [Category] = []
     
     @State private var title = ""
@@ -25,7 +32,6 @@ struct NewRecipeView: View {
     @State private var ingredients = ""
     @State private var instructions = ""
     @State private var notes = ""
-//    @State private var category:[Category] = []
     
     var body: some View {
         VStack {
@@ -42,13 +48,8 @@ struct NewRecipeView: View {
                     if selectedCategories.isEmpty || title.isEmpty || author.isEmpty || date.isEmpty || timeRequired.isEmpty || servings.isEmpty || expertiseRequired.isEmpty || caloriesPerServing.isEmpty || ingredients.isEmpty || instructions.isEmpty {
                         showAlert = true
                     } else {
-                        do {
-                            addItem()
-                            try modelContext.save()
-                            dismiss()
-                        } catch {
-                            print("An error occurred: \(error)")
-                        }
+                        addItem()
+                        dismiss()
                     }
                 }
                 .alert(isPresented: $showAlert) {
@@ -75,9 +76,9 @@ struct NewRecipeView: View {
                 //                    }
                 //                }
                 List {
-                    ForEach(categories, id: \.self) { category in
+                    ForEach(uniqueCategories) { category in
                         Toggle(category.name, isOn: Binding(
-                            get: { self.selectedCategories.contains(category) },
+                            get: { self.selectedCategories.contains(where: { $0.name == category.name }) },
                             set: { (newValue) in
                                 if newValue {
                                     self.selectedCategories.append(category)
@@ -87,23 +88,22 @@ struct NewRecipeView: View {
                             }
                         ))
                     }
+                    
                 }
-                Text("Selected Categories: \(selectedCategories.map { $0.name }.joined(separator: ", "))")
+                Text("Selected Categories: \(selectedCategories.map { $0.name }.joined(separator: ", ") )")
             }
         }
     }
     
     private func addItem() {
         withAnimation {
-            do {
-                let recipe = Recipe(title: title, author: author, date: date, timeRequired: timeRequired, servings: servings, expertiseRequired: expertiseRequired, caloriesPerServing: caloriesPerServing, ingredients: ingredients, instructions: instructions, notes: notes, categories: selectedCategories, favorite: false)
-                try modelContext.insert(recipe)
-                dismiss()
-            } catch {
-                print("An error occurred: \(error)")
-            }
+            let recipe = Recipe(title: title, author: author, date: date, timeRequired: timeRequired, servings: servings, expertiseRequired: expertiseRequired, caloriesPerServing: caloriesPerServing, ingredients: ingredients, instructions: instructions, notes: notes, category: [], favorite: false)
             
-            //            modelContext.insert(recipe)
+            // Add selected categories
+            for category in selectedCategories {
+                recipe.category?.append(category)
+            }
+            modelContext.insert(recipe)
         }
     }
 }

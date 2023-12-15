@@ -20,10 +20,10 @@ final class Recipe {
     var ingredients: String
     var instructions: String
     var notes: String
-    var categories: [Category]
+    var category: [Category]?
     var favorite: Bool
     
-    init(title: String, author: String, date: String, timeRequired: String, servings: String, expertiseRequired: String, caloriesPerServing: String, ingredients: String, instructions: String, notes: String, categories: [Category], favorite: Bool) {
+    init(title: String, author: String, date: String, timeRequired: String, servings: String, expertiseRequired: String, caloriesPerServing: String, ingredients: String, instructions: String, notes: String, category: [Category]? = nil, favorite: Bool) {
         self.title = title
         self.author = author
         self.date = date
@@ -34,7 +34,7 @@ final class Recipe {
         self.ingredients = ingredients
         self.instructions = instructions
         self.notes = notes
-        self.categories = categories
+        self.category = category
         self.favorite = favorite
     }
 }
@@ -42,6 +42,9 @@ final class Recipe {
 @Model
 final class Category {
     var name: String
+    
+    @Relationship(inverse: \Recipe.category)
+    var recipes = [Recipe]()
     
     init(name: String) {
         self.name = name

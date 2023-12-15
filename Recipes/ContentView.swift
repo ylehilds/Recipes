@@ -14,6 +14,11 @@ struct ContentView: View {
     @Query(sort: [SortDescriptor(\Recipe.title)]) private var recipes: [Recipe]
     
     @Query(sort: [SortDescriptor(\Category.name)]) private var categories: [Category]
+    var uniqueCategories: [Category] {
+        var uniqueNames = Set<String>()
+        return categories.filter { uniqueNames.insert($0.name).inserted }
+    }
+    
     @State private var search = ""
     @State private var showingCreateRecipeSheet = false
     @State private var showingCreateCategorySheet = false
@@ -40,8 +45,10 @@ struct ContentView: View {
                 }
                 
                 Section(header: Text("Recipes by Categories")) {
-                    ForEach(categories) { category in
-                        NavigationLink(destination: browseAllList(recipes: recipes.filter { $0.categories.contains(where: { $0.name == category.name }) })) {
+                    ForEach(uniqueCategories, id: \.self) { category in
+                        NavigationLink(destination: browseAllList(recipes: recipes.filter { recipe in
+                            recipe.category?.contains(where: { $0.name == category.name }) ?? false
+                        })) {
                             ScrollView {
                                 VStack {
                                     Markdown {
@@ -134,7 +141,7 @@ struct ContentView: View {
             if categories.count == 0 {
                 Text("No categories yet. Tap the + button to add a category.")
             } else {
-                ForEach(categories) { category in
+                ForEach(uniqueCategories) { category in
                     NavigationLink {
                         ScrollView {
                             VStack {

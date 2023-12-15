@@ -20,11 +20,11 @@ struct EditRecipeView: View {
     
     init(recipe: Recipe?) {
         self.recipe = recipe
-        _selectedCategories = State(initialValue: recipe?.categories ?? [])
+        _selectedCategories = State(initialValue: recipe?.category ?? [])
     }
-
+    
     func formIsValid(_ recipe: Recipe) -> Bool {
-        !selectedCategories.isEmpty && !recipe.title.isEmpty && !recipe.author.isEmpty && !recipe.date.isEmpty && !recipe.timeRequired.isEmpty && !recipe.servings.isEmpty && !recipe.expertiseRequired.isEmpty && !recipe.caloriesPerServing.isEmpty && !recipe.ingredients.isEmpty && !recipe.instructions.isEmpty
+        !recipe.title.isEmpty && !recipe.author.isEmpty && !recipe.date.isEmpty && !recipe.timeRequired.isEmpty && !recipe.servings.isEmpty && !recipe.expertiseRequired.isEmpty && !recipe.caloriesPerServing.isEmpty && !recipe.ingredients.isEmpty && !recipe.instructions.isEmpty
     }
     
     var body: some View {
@@ -52,72 +52,74 @@ struct EditRecipeView: View {
                             TextField("Date", text: Binding(get: { recipe.date }, set: { newValue in
                                 recipe.date = newValue
                                 if recipe.date.isEmpty {
-                                   showAlert = true
-                               }
+                                    showAlert = true
+                                }
                             }), axis: .vertical)
                         }
                         Section(header: Text("Time Required")) {
                             TextField("Time Required", text: Binding(get: { recipe.timeRequired }, set: { newValue in
                                 recipe.timeRequired = newValue
                                 if recipe.timeRequired.isEmpty {
-                                   showAlert = true
-                               }
+                                    showAlert = true
+                                }
                             }), axis: .vertical)
                         }
                         Section(header: Text("Servings")) {
                             TextField("Servings", text: Binding(get: { recipe.servings }, set: { newValue in
                                 recipe.servings = newValue
                                 if recipe.servings.isEmpty {
-                                   showAlert = true
-                               }
+                                    showAlert = true
+                                }
                             }), axis: .vertical)
                         }
                         Section(header: Text("Expertise Required")) {
                             TextField("Expertise Required", text: Binding(get: { recipe.expertiseRequired }, set: { newValue in
                                 recipe.expertiseRequired = newValue
                                 if recipe.expertiseRequired.isEmpty {
-                                   showAlert = true
-                               }
+                                    showAlert = true
+                                }
                             }), axis: .vertical)
                         }
                         Section(header: Text("Calories Per Serving")) {
                             TextField("Calories Per Serving", text: Binding(get: { recipe.caloriesPerServing }, set: { newValue in
                                 recipe.caloriesPerServing = newValue
                                 if recipe.caloriesPerServing.isEmpty {
-                                   showAlert = true
-                               }
+                                    showAlert = true
+                                }
                             }), axis: .vertical)
                         }
                         Section(header: Text("Ingredients")) {
                             TextField("Ingredients", text: Binding(get: { recipe.ingredients }, set: { newValue in
                                 recipe.ingredients = newValue
                                 if recipe.ingredients.isEmpty {
-                                   showAlert = true
-                               }
+                                    showAlert = true
+                                }
                             }), axis: .vertical)
                         }
                         Section(header: Text("Instructions")) {
                             TextField("Instructions", text: Binding(get: { recipe.instructions }, set: { newValue in
                                 recipe.instructions = newValue
                                 if recipe.instructions.isEmpty {
-                                   showAlert = true
-                               }
+                                    showAlert = true
+                                }
                             }), axis: .vertical)
                         }
                         Section(header: Text("notes")) {
                             TextField("Notes", text: Binding(get: { recipe.notes }, set: { recipe.notes = $0 }), axis: .vertical)
                         }
                         Section(header: Text("Category")) {
-//                            Picker("Category", selection: Binding(get: { recipe.category }, set: { newValue in
-//                                recipe.category = newValue
-//                                if recipe.category.isEmpty {
-//                                   showAlert = true
-//                               }
-//                            })) {
-//                                ForEach(categories) { category in
-//                                    Text(category.name).tag(category.name)
-//                                }
-//                            }
+                            // When the picker only accepted 1 value
+                            
+                            //                            Picker("Category", selection: Binding(get: { recipe.category }, set: { newValue in
+                            //                                recipe.category = newValue
+                            //                                if recipe.category.isEmpty {
+                            //                                   showAlert = true
+                            //                               }
+                            //                            })) {
+                            //                                ForEach(categories) { category in
+                            //                                    Text(category.name).tag(category.name)
+                            //                                }
+                            //                            }
                             List {
                                 ForEach(categories, id: \.self) { category in
                                     Toggle(category.name, isOn: Binding(
@@ -132,20 +134,19 @@ struct EditRecipeView: View {
                                     ))
                                 }
                             }
-//                            Text("Selected Categories: \(selectedCategories.map { $0.name }.joined(separator: ", "))")
                         }
                     }
                     .toolbar {
                         ToolbarItem(placement: .navigationBarLeading) {
                             Button(action: {
                                 if formIsValid(recipe) {
-                                    recipe.categories = selectedCategories
-                                            do {
-                                                try modelContext.save()
-                                                dismiss()
-                                            } catch {
-                                                print("An error occurred: \(error)")
-                                            }
+                                    recipe.category = selectedCategories
+                                    do {
+                                        try modelContext.save()
+                                        dismiss()
+                                    } catch {
+                                        print("An error occurred: \(error)")
+                                    }
                                 } else {
                                     showAlert = true
                                 }
@@ -175,6 +176,6 @@ struct EditRecipeView: View {
 #Preview {
     let category1 = Category(name: "Comfort")
     let category2 = Category(name: "Brazilian")
-    let recipe = Recipe(title: "Feijoada", author: "John Doe", date: "11/29/2023", timeRequired: "3 hours", servings: "20", expertiseRequired: "Beginner", caloriesPerServing: "300", ingredients: "beans, pork, onions, etc...", instructions: "Cook for 2.5 hrs", notes: "cook on medium heat", categories: [category1, category2], favorite: true)
+    let recipe = Recipe(title: "Feijoada", author: "John Doe", date: "11/29/2023", timeRequired: "3 hours", servings: "20", expertiseRequired: "Beginner", caloriesPerServing: "300", ingredients: "beans, pork, onions, etc...", instructions: "Cook for 2.5 hrs", notes: "cook on medium heat", category: [category1, category2], favorite: true)
     return EditRecipeView(recipe: recipe)
 }

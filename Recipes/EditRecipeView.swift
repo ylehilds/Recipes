@@ -107,7 +107,7 @@ struct EditRecipeView: View {
                         Section(header: Text("notes")) {
                             TextField("Notes", text: Binding(get: { recipe.notes }, set: { recipe.notes = $0 }), axis: .vertical)
                         }
-                        Section(header: Text("Category")) {
+                        Section(header: Text("Categories")) {
                             // When the picker only accepted 1 value
                             
                             //                            Picker("Category", selection: Binding(get: { recipe.category }, set: { newValue in
@@ -134,6 +134,7 @@ struct EditRecipeView: View {
                                     ))
                                 }
                             }
+//                            Text("Selected Categories: \(selectedCategories.map { $0.name }.joined(separator: ", ") )")
                         }
                     }
                     .toolbar {

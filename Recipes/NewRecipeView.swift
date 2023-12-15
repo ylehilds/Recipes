@@ -45,7 +45,7 @@ struct NewRecipeView: View {
                 Spacer()
                 
                 Button("Save") {
-                    if selectedCategories.isEmpty || title.isEmpty || author.isEmpty || date.isEmpty || timeRequired.isEmpty || servings.isEmpty || expertiseRequired.isEmpty || caloriesPerServing.isEmpty || ingredients.isEmpty || instructions.isEmpty {
+                    if title.isEmpty || author.isEmpty || date.isEmpty || timeRequired.isEmpty || servings.isEmpty || expertiseRequired.isEmpty || caloriesPerServing.isEmpty || ingredients.isEmpty || instructions.isEmpty {
                         showAlert = true
                     } else {
                         addItem()
@@ -75,22 +75,24 @@ struct NewRecipeView: View {
                 //                        Text(category.name).tag(category.name)
                 //                    }
                 //                }
-                List {
-                    ForEach(uniqueCategories) { category in
-                        Toggle(category.name, isOn: Binding(
-                            get: { self.selectedCategories.contains(where: { $0.name == category.name }) },
-                            set: { (newValue) in
-                                if newValue {
-                                    self.selectedCategories.append(category)
-                                } else {
-                                    self.selectedCategories.removeAll { $0 == category }
+                Section(header: Text("Categories")) {
+                    List {
+                        ForEach(uniqueCategories) { category in
+                            Toggle(category.name, isOn: Binding(
+                                get: { self.selectedCategories.contains(where: { $0.name == category.name }) },
+                                set: { (newValue) in
+                                    if newValue {
+                                        self.selectedCategories.append(category)
+                                    } else {
+                                        self.selectedCategories.removeAll { $0 == category }
+                                    }
                                 }
-                            }
-                        ))
+                            ))
+                        }
+                        
                     }
-                    
+                    //                Text("Selected Categories: \(selectedCategories.map { $0.name }.joined(separator: ", ") )")
                 }
-                Text("Selected Categories: \(selectedCategories.map { $0.name }.joined(separator: ", ") )")
             }
         }
     }

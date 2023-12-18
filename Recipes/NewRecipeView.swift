@@ -103,7 +103,7 @@ struct NewRecipeView: View {
             
             // Add selected categories
             for category in selectedCategories {
-                recipe.category?.append(category)
+                recipe.category.append(category)
             }
             modelContext.insert(recipe)
         }

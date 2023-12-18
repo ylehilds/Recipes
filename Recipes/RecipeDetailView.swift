@@ -42,7 +42,7 @@ struct RecipeDetailView: View {
                 
                     \(recipe.notes)
                 
-                    **Category**: \(recipe.category?.map { $0.name }.joined(separator: ", ") ?? "")
+                    **Category**: \(recipe.category.map { $0.name }.joined(separator: ", "))
                 """
     }
     
@@ -70,7 +70,7 @@ struct RecipeDetailView: View {
                         .padding()
                     Markdown ("## Notes \n \(recipe.notes)")
                         .padding()
-                    Markdown ("**Category**: \(recipe.category?.map { $0.name }.joined(separator: ", ") ?? "")")
+                    Markdown ("**Category**: \(recipe.category.map { $0.name }.joined(separator: ", "))")
                         .padding()
                 }
             }

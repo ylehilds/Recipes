@@ -47,7 +47,7 @@ struct ContentView: View {
                 Section(header: Text("Recipes by Categories")) {
                     ForEach(uniqueCategories, id: \.self) { category in
                         NavigationLink(destination: browseAllList(recipes: recipes.filter { recipe in
-                            recipe.category?.contains(where: { $0.name == category.name }) ?? false
+                            recipe.category.contains(where: { $0.name == category.name })
                         })) {
                             ScrollView {
                                 VStack {

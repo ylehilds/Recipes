@@ -41,7 +41,7 @@ final class Recipe {
 
 @Model
 final class Category {
-    var name: String
+    @Attribute(.unique) var name: String
     
     @Relationship(inverse: \Recipe.category)
     var recipes = [Recipe]()

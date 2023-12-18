@@ -20,6 +20,7 @@ final class Recipe {
     var ingredients: String
     var instructions: String
     var notes: String
+    // @Relationship(deleteRule: .nullify) // This is the default, so it's not necessary to list it.
     var category: [Category]
     var favorite: Bool
     
@@ -43,6 +44,11 @@ final class Recipe {
 final class Category {
     @Attribute(.unique) var name: String
     
+    // This creates a many-to-many relationship with Recipe because Recipe's
+    // category references Category, and the recipes property
+    // here references Recipe.  With a many-to-many relationship, it's likely
+    // that the right way to handle deletion is the deleteRule .nullify, which
+    // is the default, so I haven't specified it here.
     @Relationship(inverse: \Recipe.category)
     var recipes = [Recipe]()
     
